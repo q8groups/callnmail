@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+    <h4 class="text-success">Date: {{ mail.date_email }}</h4><br />
+    <table class="table">
+        <tr>
+            <td><b>Mail From:</b> {{ mail.from_user }}</td>
+        </tr>
+        <tr>
+            <td><b>Subject:</b> {{ mail.subject }}</td>
+        </tr>
+        <tr>
+            <td><b>Body:</b> {% if mail.body %}<p><br />{{ mail.body }}</p>{% endif %}</td>
+        </tr>
+        <tr>
+            <td><b>Attachments:</b>{% for attachment in mail.mailattachment_set.all %}<a href="{% url 'mail:download_attachment' attachment.pk %}">{{ attachment.filename }}</a> | {% endfor %}</td>
+        </tr>
+
+    </table>
+
+{% endblock content %}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+        <h3 class="text-success">Mail Forward Emails</h3><br />
+    <table class="table">
+        {% if emails %}
+        <tr>
+            <td>Email</td>
+        </tr>
+        {% for mail in emails %}
+        <tr>
+            <td>{{ mail.email }}</td></a>
+        </tr>
+        {% endfor %}
+        {% endif %}
+    </table>
+        <a href="{% url 'mail:mailforward_create' %}"><button class="btn btn-success">Add</button></a>
+{% endblock content %}

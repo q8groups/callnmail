@@ -1,0 +1,7 @@
+#Django==1.7b4
+https://www.djangoproject.com/download/1.7.b4/tarball/
+bpython==0.12
+django-braces==1.2.2
+django-model-utils==1.5.0
+logutils==0.3.3
+psycopg2==2.5.3

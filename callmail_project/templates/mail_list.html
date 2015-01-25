@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+        <h3 class="text-success">Mails</h3><br />
+    <table class="table">
+        {% if mails %}
+        <tr>
+            <td>Sender</td>
+            <td>Subject</td>
+            <td>Date</td>
+        </tr>
+        {% for mail in mails %}
+        <tr>
+            <td><a href="{% url 'mail:mail_detail' mail.pk %}">{{ mail.from_user }}</a></td>
+            <td>{{ mail.subject }}</td>
+            <td>{{ mail.date_email }}</td></a>
+        </tr>
+        {% endfor %}
+        {% endif %}
+    </table>
+{% endblock content %}
