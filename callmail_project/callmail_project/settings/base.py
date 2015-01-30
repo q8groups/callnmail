@@ -223,6 +223,7 @@ THIRD_PARTY_APPS = (
     'rest_framework_swagger',
     'django_mailbox',
     "djrill",
+    'django_extensions',
     )
 
 
