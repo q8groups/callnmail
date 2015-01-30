@@ -29,7 +29,7 @@ DATABASES = {
         'NAME': 'callmail',
         'USER': 'ubuntu',
         'PASSWORD': 'nokia6230@',
-        'HOST': '',
+        'HOST': 'callnmail.com',
         'PORT': '',
     }
 }

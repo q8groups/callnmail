@@ -14,7 +14,8 @@ from pytz import timezone
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.core.files.base import File
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMessage, EmailMultiAlternatives
+
 
 
 from dateutil import parser
@@ -135,6 +136,11 @@ class FetchEmail:
 
     def flush_emails(self):
         self.server.expunge()
+
+
+
+
+
 
 
 # #How to use:
