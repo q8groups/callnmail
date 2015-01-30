@@ -37,7 +37,7 @@ ADMINS = (
 )
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # Host for sending e-mail.
 EMAIL_HOST = 'localhost'
@@ -222,7 +222,8 @@ THIRD_PARTY_APPS = (
     'rest_framework.authtoken',
     'rest_framework_swagger',
     'django_mailbox',
-)
+    "djrill",
+    )
 
 
 
@@ -299,3 +300,6 @@ TWILIO_DEFAULT_CALLERID = '+18329240141'
 LOGIN_URL = '/login/'
 
 LOGIN_REDIRECT_URL = '/login/'
+
+MANDRILL_API_KEY = "CeQbYPB9BDvrSnvhCITBuA"
+EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
