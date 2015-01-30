@@ -84,7 +84,7 @@ def fetch_email(message):
                            forward_list.append(j)
 
                     subject = message.subject
-                    from_email = message.from_address[0]
+                    from_email = message.to_addresses[0]
                     headers = {'Reply-To': from_email}
                     msg = EmailMultiAlternatives(subject, text_content, from_email, forward_list,headers=headers)
                     msg.attach_alternative(html_content, "text/html")
