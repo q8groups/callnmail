@@ -6,7 +6,7 @@ from django_mailbox.models import Mailbox
 
 @task
 def email_cron():
-    mailboxes = Mailbox.active_mailboxes.get('callnmail')
+    mailboxes = Mailbox.active_mailboxes.all()[0]
     mailboxes.get_new_mail()
 
 
