@@ -224,6 +224,7 @@ THIRD_PARTY_APPS = (
     'django_mailbox',
     "djrill",
     'django_extensions',
+    'boto',
     )
 
 
