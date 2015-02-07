@@ -225,6 +225,7 @@ THIRD_PARTY_APPS = (
     "djrill",
     'django_extensions',
     'boto',
+    'storages',
     )
 
 
