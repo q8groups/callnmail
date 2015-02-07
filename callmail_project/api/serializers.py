@@ -66,6 +66,7 @@ class UserLinkedMailSerializer(serializers.ModelSerializer):
 
 class UserProfileSerializer(serializers.ModelSerializer):
     user = UserLinkedMailSerializer(read_only=True)
+    avatar = serializers.Field(source='avatar.url')
 
     class Meta:
         model = UserProfile
