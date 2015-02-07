@@ -306,7 +306,7 @@ LOGIN_REDIRECT_URL = '/login/'
 
 MANDRILL_API_KEY = "CeQbYPB9BDvrSnvhCITBuA"
 EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
-
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 AWS_ACCESS_KEY_ID='AKIAJ4VU7RFP45P4NBNA'
 AWS_SECRET_ACCESS_KEY='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'
