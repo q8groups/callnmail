@@ -1,9 +1,11 @@
 from django.conf.urls import patterns, include, url
 
-from .views import HomePage, RegistrationView, LoginView, MailListView, MailDetailView, download_attachment, PasswordResetView, PasswordResetRequestView, MailForwardCreateView, MailForwardListView
+from .views import HomePage, RegistrationView, LoginView, MailListView, MailDetailView, download_attachment, PasswordResetView, PasswordResetRequestView, MailForwardCreateView, MailForwardListView, \
+    AboutView
 
 urlpatterns = patterns('',
     url(r'^$', HomePage.as_view(), name='index'),
+    url(r'^about/$', AboutView.as_view(), name='about'),
     url(r'^register/$', RegistrationView.as_view(), name='registration'),
     url(r'^login/$', LoginView.as_view(), name='login'),
     url(r'^mail/$', MailListView.as_view(), name='mail_list'),

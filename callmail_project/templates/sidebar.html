@@ -1,0 +1,21 @@
+{% load static %}
+<div class="sidebar">
+                        <div class="widget">
+                            <ul class="sidebar_menu">
+                                <li class="active"><a href="{% url 'mail:about' %}">About</a></li>
+                                <li><a href="{% url 'mail:login' %}">Login/Sign up</a></li>
+                                <li><a href="#">FAQ</a></li>
+                                <li><a href="#">Privacy Policy</a></li>
+                                <li><a href="contact.html">Contact Us</a></li>
+                            </ul>
+                        </div>
+                        <!-- /widget -->
+
+                        <div class="widget">
+                            <div class="app_store">
+                                <a href="#"><img src="{% static 'images/icon_app_store.png' %}" alt="app_store"></a>
+                                <a href="#"><img src="{% static 'images/icon_app_google_play.png' %}" alt="google_play"></a>
+                            </div>
+                        </div>
+                        <!-- /widget -->
+                    </div>

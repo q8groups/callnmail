@@ -176,3 +176,7 @@ class MailForwardCreateView(LoginRequiredMixin, generic.CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super(MailForwardCreateView, self).form_valid(form)
+
+
+class AboutView(generic.TemplateView):
+    template_name = 'about.html'

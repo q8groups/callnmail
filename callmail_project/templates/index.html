@@ -1,6 +1,28 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+{% load static %}
+{% block head_content %}
+<div class="head_banner">
+						<span class="home_phone"><img src="{% static 'images/iphone_6.png' %}" alt="iphone-6"></span>
+						<div class="hb_caption">
+							<h1>no more spelling out<br> your email address to friend</h1>
+							<p>Use your phone number for the email address<br> and link it to your existing email.</p>
+							<a class="button" href="{% url 'mail:login' %}">Login/Sign up</a>
+						</div>
+
+					</div>
+
+{% endblock %}
 {% block content %}
-      <h1>{% block page_title %}Call Mail{% endblock page_title %}</h1>
-      <hr />
-      Welcome to call mail.
-{% endblock content %}
+<section id="main_content" class="frontpage">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="app_store">
+								<a href="#"><img src="{% static 'images/icon_app_store.png'%}" alt="app_store"></a>
+								<a href="#"><img src="{% static 'images/icon_app_google_play.png' %}" alt="google_play"></a>
+							</div>
+						</div>
+					</div><!-- /row -->
+				</div>
+			</section><!-- /main_content -->
+{% endblock %}

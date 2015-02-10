@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+<section id="main_content" class="bg_gray">
+    <div class="container">
+        <div class="sec_up">
+            <div class="row alter">
+                <div class="col-sm-8 col-md-9">
+                    <div class="content">
+                        <div class="about_us">
+                            <div class="page_title">
+                                <h1>About Us</h1>
+
+                                <p>Contribute to the WhatsApp translation in your language. Let's make WhatsApp
+                                    available to everyone in the world! WhatsApp Messenger is a cross-platform mobile
+                                    messaging app which allows you to exchange messages without having to pay for SMS.
+                                    WhatsApp Messenger is available for iPhone, BlackBerry, Windows Phone, Android and
+                                    Nokia. </p>
+                            </div>
+                            <!-- /page_title -->
+
+                            <div class="row_block">
+                                <h3>What</h3>
+
+                                <p>WhatsApp Inc. is an early stage technology startup founded in the heart of Silicon
+                                    Valley. What does the name mean you ask? Well, WhatsApp is a pun on What's Up in
+                                    case you didn't get it yet:)</p>
+                            </div>
+
+                            <div class="row_block">
+                                <h3>Why</h3>
+
+                                <p>Because we want to build a better SMS alternative. Because we believe we can. Because
+                                    someday very soon everybody will have a Smartphone.</p>
+                            </div>
+
+                            <div class="row_block">
+                                <h3>Who</h3>
+
+                                <p>WhatsApp was founded by two guys who spent combined 20 years doing geeky stuff at
+                                    Yahoo! Inc. before starting WhatsApp Inc.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /content -->
+
+                <div class="col-sm-4 col-md-3">
+                    {% include 'sidebar.html' %}
+                </div>
+                <!-- /sidebar -->
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

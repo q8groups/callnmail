@@ -1,0 +1,11 @@
+{% load static %}
+<div class="head">
+						<div class="logo"><a href="{% url 'mail:index' %}"><img src="{% static 'images/logo_bg.png' %}" alt="logo"></a></div>
+						<div class="menu">
+							<ul>
+								<li><a href="{% url 'mail:about' %}">About</a></li>
+								<li><a href="{% url 'mail:login' %}">Login/Sign up</a></li>
+								<li><a href="contact.html">Contact</a></li>
+							</ul>
+						</div>
+					</div>

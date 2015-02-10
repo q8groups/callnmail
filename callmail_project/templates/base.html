@@ -1,81 +1,97 @@
-{% load staticfiles %}
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>{% block title %}callmail_project{% endblock title %}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+<head>
+	<meta charset="utf-8">
+	<title>Call N Email</title>
 
-    <!-- Le styles -->
-    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
-    <style>
-      body {
-        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-      }
-    </style>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+	<!-- Fevicon -->
+	<link rel="icon" href="favicon.png" type="png" />
+	
+	<!-- bootstrap -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+	
+	<!-- fonts -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/fonts.css' %}">
 
-    <!-- This file store project specific CSS -->
-    <link href="{% static 'css/callmail_project.css' %}" rel="stylesheet">
+	<!-- custom -->
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}">
 
-    <!-- Use this to quickly test CSS changes in a template,
-        then move to callmail_project.css -->
-    {% block extra_css %}{% endblock extra_css %}
-  </head>
+	<!-- js -->
+	<script type="text/javascript" src="{% static 'js/jquery-1.11.2.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/wow.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
 
-  <body>
+	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+	 <script src="js/html5shiv.min.js"></script>
+	 <script src="js/respond.js"></script>
+	 <![endif]-->
 
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="{% url 'mail:index' %}">callmail_project</a>
-        </div>
-        <div class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-             <li><a href="{% url 'mail:index' %}">Home</a></li>
+	</head>
 
-            {% if user.is_authenticated %}
-                <li><a href="{% url 'mail:mailforward_list' %}">Mail Forward</a></li>
-                <li><a href="{% url 'mail:mail_list' %}">Mail</a></li>
-            {% else %}
-                <li><a href="{% url 'mail:login' %}">Login</a></li>
-                <li><a href="{% url 'mail:registration' %}">Register</a></li>
-            {% endif %}
+	<body>
+		<div class="wrap">
+			<header class="header_single">
+				<div class="container">
+					<!-- /head -->
+                    {% include 'header.html' %}
+					<!-- /head_banner -->
+				    {% block head_content %}
+                    {% endblock %}
+                </div>
+			</header><!-- /header -->
 
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </div>
+            {% block content %}
 
-    <div class="container">
+            {% endblock %}
+		</div>
 
+		<footer class="main_footer">
+			<div class="container">
+				<div  class="footer">
+					<div class="footer_logo">
+						<a href="#"><img src="{% static 'images/footer_logo.png' %}" alt="footer_logo"></a>
+					</div><!-- /footer_logo -->
 
+					<div class="footer_social">
+						<ul>
+							<li><a href="#"><img src="{% static 'images/social_icon_youtube.png' %}" alt="social_icon"></a></li>
+							<li><a href="#"><img src="{% static 'images/social_icon_facebook.png' %}" alt="social_icon"></a></li>
+							<li><a href="#"><img src="{% static 'images/social_icon_twitter.png' %}" alt="social_icon"></a></li>
+						</ul>
+					</div><!-- /footer_social -->
+				</div>
+			</div>
+		</footer><!-- /footer -->
 
-      {% block content %}
-      {% endblock content %}
+		<section class="copyright">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 col-sm-7">
+						<div class="footer_menu">
+							<ul>
+								<li><a href="{% url 'mail:about' %}">About</a></li>
+								<li><a href="{% url 'mail:login' %}">Login/Sign up</a></li>
+								<li><a href="#">FAQ</a></li>
+								<li><a href="#">Privacy Policy</a></li>
+								<li><a href="contact.html">Contact Us</a></li>
+							</ul>
+						</div><!-- /footer_menu -->
+					</div>
+					<div class="col-md-6 col-sm-5">
+						<div class="copyright_content">
+							<p>© 2014 Copyright CallnMail. All Rights Reserved.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section><!-- /copyright -->
 
-    </div> <!-- /container -->
-
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-
-    <!-- place project specific Javascript in this file -->
-    <script src="{% static 'js/callmail_project.js' %}"></script>
-
-    {% block extra_js %}{% endblock extra_js %}
-  </body>
-</html>
+	</body>
+	</html>
