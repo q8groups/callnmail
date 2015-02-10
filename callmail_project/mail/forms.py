@@ -63,10 +63,10 @@ class PasswordResetRequestForm(forms.Form):
 
 
 class PasswordResetForm(forms.Form):
-    phone_number = forms.IntegerField()
-    new_password1 = forms.CharField(widget=forms.PasswordInput, label='New Password')
-    new_password2 = forms.CharField(widget=forms.PasswordInput, label='New Password (Again)')
-    secret_token = forms.IntegerField()
+    phone_number = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'Mobile', 'required': 'true'}))
+    new_password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'New Password', 'required': 'true'}))
+    new_password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Repeat New Password', 'required': 'true'}))
+    secret_token = forms.IntegerField(widget=forms.PasswordInput(attrs={'placeholder': 'Secret Token', 'required': 'true'}))
 
 
 
