@@ -31,6 +31,11 @@ class Mail(models.Model):
         return 'From: %s To: %s' % (self.from_user, self.to_user)
 
 
+class AccountActivation(models.Model):
+    user = models.ForeignKey(User)
+    activation_code = models.IntegerField()
+
+
 class MailAttachment(models.Model):
     mail = models.ForeignKey(Mail)
     attachment = models.FileField(upload_to='attachments/')

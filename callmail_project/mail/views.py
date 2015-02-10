@@ -1,5 +1,6 @@
 import os
 import user
+from django.contrib import messages
 
 from django.shortcuts import render, HttpResponseRedirect, HttpResponse, get_object_or_404
 from django.views import generic
@@ -10,9 +11,9 @@ from django.conf import settings
 
 from braces.views import LoginRequiredMixin
 
-from .forms import RegistrationForm, LoginForm, PasswordResetRequestForm, PasswordResetForm
+from .forms import RegistrationForm, LoginForm, PasswordResetRequestForm, PasswordResetForm, ActivateForm
 from .utils import send_sms, determine_mime_type, generate_random_number
-from .models import Mail, MailAttachment, ForgotPasswordToken, MailForward
+from .models import Mail, MailAttachment, ForgotPasswordToken, MailForward, AccountActivation
 from advertisement.models import UserProfile
 
 
@@ -31,16 +32,24 @@ class RegistrationView(generic.View):
         if rform.is_valid():
             phone_number = request.POST.get('phone_number')
             password = request.POST.get('password1')
+            first_name = request.POST.get('first_name')
+            last_name = request.POST.get('last_name')
             avatar = request.POST.get('avatar')
             # gender = request.POST.get('gender')
             # age_group = request.POST.get('age_group')
             # country = request.POST.get('country')
-            message = 'User created for %s' %(phone_number)
+            activation_code = generate_random_number()
+            message = 'User created for %s. Your activation code is %s' % (phone_number, str(activation_code))
+
 
             try:
                 user = User.objects.get(username=phone_number)
-                user.is_active = True
+                # user.is_active = True
                 user.set_password(password)
+                if first_name:
+                    user.first_name = first_name
+                if last_name:
+                    user.last_name = last_name
                 user.save()
                 send_sms(phone_number, message)
                 profile = UserProfile.objects.get(user=user)
@@ -52,10 +61,20 @@ class RegistrationView(generic.View):
 
             except User.DoesNotExist:
                 user = User.objects.create_user(username=phone_number, password=password)
+                if first_name:
+                    user.first_name = first_name
+                if last_name:
+                    user.last_name = last_name
+                user.is_active = False
+                user.save()
                 UserProfile.objects.create(user=user, avatar=avatar)
                 send_sms(phone_number, message)
 
-            return HttpResponseRedirect(reverse('mail:index'))
+            activation = AccountActivation.objects.filter(user=user)
+            if activation.exists():
+                activation.delete()
+            AccountActivation.objects.create(user=user, activation_code=activation_code)
+            return HttpResponseRedirect(reverse('mail:activate_user'))
         else:
             return render(request, 'registration.html', {'form': LoginForm(), 'rform': rform})
 
@@ -85,6 +104,30 @@ class LoginView(generic.View):
         else:
             return render(request, 'login.html', {'form': form})
 
+
+class ActivateUser(generic.View):
+    def get(self, request):
+        form = ActivateForm()
+        return render(request, 'activate_account.html', {'form': form})
+
+    def post(self, request):
+        form = ActivateForm(request.POST or None)
+        if form.is_valid():
+            username = request.POST.get('phone_number')
+            activation_code = request.POST.get('activation_code')
+            activation = AccountActivation.objects.filter(user__username=username, activation_code=activation_code)
+            if activation.exists():
+                user = User.objects.get(username=username)
+                user.is_active = True
+                user.save()
+                AccountActivation.objects.filter(user=user).delete()
+                messages.success(request, 'Account successfully activated.')
+                return HttpResponseRedirect(reverse('mail:login'))
+            else:
+                return render(request, 'activate_account.html', {'form': form, 'error': 'Invalid Activation Code.'})
+
+        else:
+            return render(request, 'activate_account.html', {'form': form})
 
 
 class MailListView(LoginRequiredMixin, generic.ListView):
