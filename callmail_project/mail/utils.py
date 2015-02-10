@@ -37,14 +37,6 @@ def create_random_password():
     return "{0}".format(randint(1000, 9999))
 
 
-
-
-
-
-
-
-
-
 # def mail_forward(from_, to, subject, body, attachment=None):
 #     email = EmailMessage(subject, body, from_, to, headers = {'Reply-To': from_})
 #     if attachment:

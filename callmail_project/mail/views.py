@@ -22,17 +22,19 @@ class HomePage(generic.TemplateView):
 
 class RegistrationView(generic.View):
     def get(self, request):
-        form = RegistrationForm()
-        return render(request, 'registration.html', {'form': form})
+        rform = RegistrationForm()
+        form = LoginForm()
+        return render(request, 'registration.html', {'form': form, 'rform': rform})
 
     def post(self, request):
-        form = RegistrationForm(request.POST or None)
-        if form.is_valid():
+        rform = RegistrationForm(request.POST, request.FILES or None)
+        if rform.is_valid():
             phone_number = request.POST.get('phone_number')
             password = request.POST.get('password1')
-            gender = request.POST.get('gender')
-            age_group = request.POST.get('age_group')
-            country = request.POST.get('country')
+            avatar = request.POST.get('avatar')
+            # gender = request.POST.get('gender')
+            # age_group = request.POST.get('age_group')
+            # country = request.POST.get('country')
             message = 'User created for %s' %(phone_number)
 
             try:
@@ -42,20 +44,20 @@ class RegistrationView(generic.View):
                 user.save()
                 send_sms(phone_number, message)
                 profile = UserProfile.objects.get(user=user)
-                profile.gender = gender
-                profile.age_group = age_group
-                profile.country = country
+                profile.avatar = avatar
+                # profile.gender = gender
+                # profile.age_group = age_group
+                # profile.country = country
                 profile.save()
 
             except User.DoesNotExist:
                 user = User.objects.create_user(username=phone_number, password=password)
-                UserProfile.objects.create(user=user, gender=gender, age_group=age_group, country=country)
+                UserProfile.objects.create(user=user, avatar=avatar)
                 send_sms(phone_number, message)
 
-
-            return HttpResponseRedirect(reverse('mail:login'))
+            return HttpResponseRedirect(reverse('mail:index'))
         else:
-            return render(request, 'registration.html', {'form': form})
+            return render(request, 'registration.html', {'form': LoginForm(), 'rform': rform})
 
 
 class LoginView(generic.View):
@@ -65,7 +67,7 @@ class LoginView(generic.View):
         #email = EmailMessage('Hello', 'This is the bodysss', 'hell@localhost', ['admin@localhost'])
         #email.attach_file('/home/sachitad/hi.py')
         #email.send(fail_silently=False)
-        return render(request, 'login.html', {'form': form})
+        return render(request, 'login.html', {'form': form, 'rform': RegistrationForm()})
 
     def post(self, request):
         form = LoginForm(request.POST or None)
@@ -79,7 +81,6 @@ class LoginView(generic.View):
 
             else:
                 return render(request, 'login.html', {'form': form, 'error': 'Username or password not correct.'})
-
 
         else:
             return render(request, 'login.html', {'form': form})

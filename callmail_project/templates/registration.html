@@ -1,13 +1,150 @@
-{% extends "base.html" %}
-{% load bootstrap3 %}
-
-
+{% extends 'base.html' %}
+{% load static %}
 {% block content %}
-      <h3 class="text-success">Registration</h3>
-      <hr />
-      <form action="" method="post">
-          {% csrf_token %}
-          {% bootstrap_form form %}
-          <button type="submit" class="btn btn-success">Register</button>
-      </form>
+<section id="main_content" class="registration bg_gray">
+			<div class="container">
+				<div class="page_title">
+					<h1>Create an account or sign in</h1>
+					<p>Use your phone number for the email address <br>and link it to your existing email.</p>
+				</div><!-- /page_title -->
+			</div>
+
+			<div class="sec_reg">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="tab_panel tab_login" role="tabpanel">
+								<ul class="nav nav-tabs" role="tablist">
+									<li role="presentation" class="active"><a href="#login_tab" aria-controls="login_tab" role="tab" data-toggle="tab">Login</a></li>
+									<li role="presentation"><a href="#create_account" aria-controls="create_account" role="tab" data-toggle="tab">Create Account</a></li>
+								</ul>
+
+								<div class="box_container">
+									<div class="tab-content">
+										<div role="tabpanel" class="tab-pane" id="login_tab">
+											<div class="tab_item_content">
+												<div class="reg_content login">
+													<form method="post" action="">
+                                                        {% csrf_token %}
+                                                        <p class="text-center text-warning">{{ error }}</p>
+														<div class="form-group">
+															<div class="cc_phone">
+																<span class="country_code">
+																	<a href="#">00965 <i class="fa fa-angle-down"></i></a>
+																</span>
+                                                                    {{ form.phone_number }}
+																<a class="input_add_on" href="#"><i class="fa fa-phone"></i></a>
+                                                              <p class="text-warning">{{ form.phone_number.errors }}</p>
+
+															</div>
+														</div>
+
+														<div class="form-group">
+															<div class="password">
+
+                                                                {{ form.password }}
+																<a class="input_add_on" href="#"><i class="fa fa-lock"></i></a>
+                                                                <p class="text-warning">{{ form.password.errors }}</p>
+															</div>
+														</div>
+
+														<button type="submit" class="button">Login Now</button>
+													</form>
+
+												</div><!-- /reg_content -->
+
+												<div class="welcome_back">
+													<h1>Welcome Back</h1><br>
+
+													<ul class="chose_opt">
+														<li><a href="#">Activate Account</a></li>
+														<li><a href="#">Forget Password</a></li>
+													</ul>
+												</div>
+											</div>
+										</div><!-- /tab_item_content -->
+
+										<div role="tabpanel" class="tab-pane active" id="create_account">
+											<div class="tab_item_content">
+                                                <p class="text-warning">{{ rform.non_field_errors }}</p>
+                                                <form action="{% url 'mail:registration' %}" method="post">
+                                                        {% csrf_token %}
+												<div class="reg_content active_ac">
+
+
+														<div class="form-group">
+															{{ rform.first_name }}
+															<a class="input_add_on" href="#"><i class="fa fa-user"></i></a>
+                                                            <p class="text-warning">{{ rform.first_name.errors }}</p>
+														</div>
+
+														<div class="form-group">
+                                                            {{ rform.last_name }}
+															<a class="input_add_on" href="#"><i class="fa fa-user"></i></a>
+                                                             <p class="text-warning">{{ rform.last_name.errors }}</p>
+
+														</div>
+
+														<div class="form-group">
+															<div class="cc_phone">
+																<span class="country_code">
+																	<a href="#">00965 <i class="fa fa-angle-down"></i></a>
+																</span>
+																{{ rform.phone_number }}
+																<a class="input_add_on" href="#"><i class="fa fa-phone"></i></a>
+                                                                <p class="text-warning">{{ rform.phone_number.errors }}</p>
+															</div>
+														</div>
+
+														<div class="form-group">
+															<div class="password">
+                                                                {{ rform.password1 }}
+																<a class="input_add_on" href="#"><i class="fa fa-lock"></i></a>
+                                                                <p class="text-warning">{{ rform.password1.errors }}</p>
+															</div>
+														</div>
+                                                        <div class="form-group">
+															<div class="password">
+                                                                {{ rform.password2 }}
+																<a class="input_add_on" href="#"><i class="fa fa-lock"></i></a>
+                                                                <p class="text-warning">{{ rform.password2.errors }}</p>
+															</div>
+														</div>
+												</div><!-- /reg_content -->
+
+												<div class="get_activation_code">
+													<div class="pro_pics">
+														<a href="#">{{ rform.avatar }}    <i class="fa fa-camera"></i></a>
+                                                        <p class="text-warning">{{ rform.avatar.errors }}</p>
+													</div>
+													<p>Your mobile is your username including country code You will receive the activation code by SMS to your mobile</p>
+
+													<span class="terms">By registering, I accept the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></span>
+
+													<a class="button" href="#"><button type="submit">Get the activation code</button></a>
+												</div>
+                                                </form>
+											</div>
+										</div>
+									</div>
+
+									<span class="reg_ribbon"><img src="{% static 'images/ribbon.png '%}" alt="ribbon"></span>
+									<span class="iphone_6"><img src="{% static 'images/iphone_6.png' %}" alt="iphone-6"></span>
+								</div><!-- /box_container -->
+							</div>
+						</div>
+					</div><!-- /row -->
+
+					<div class="row">
+						<div class="col-sm-12">
+							<div class="app_store">
+								<a href="#"><img src="{% static 'images/icon_app_store.png' %}" alt="app_store"></a>
+								<a href="#"><img src="{% static 'images/icon_app_google_play.png' %}" alt="google_play"></a>
+							</div>
+						</div>
+					</div><!-- /row -->
+				</div>
+			</div>
+		</section>
+
 {% endblock %}

@@ -24,21 +24,27 @@
 										<div role="tabpanel" class="tab-pane active" id="login_tab">
 											<div class="tab_item_content">
 												<div class="reg_content login">
-													<form action="post">
+													<form method="post" action="">
+                                                        {% csrf_token %}
+                                                        <p class="text-center text-warning">{{ error }}</p>
 														<div class="form-group">
 															<div class="cc_phone">
 																<span class="country_code">
 																	<a href="#">00965 <i class="fa fa-angle-down"></i></a>
 																</span>
-																<input type="text" id="l_mobile" name="l_mobile" placeholder="Mobile">
+                                                                    {{ form.phone_number }}
 																<a class="input_add_on" href="#"><i class="fa fa-phone"></i></a>
+                                                              <p class="text-warning">{{ form.phone_number.errors }}</p>
+
 															</div>
 														</div>
 
 														<div class="form-group">
 															<div class="password">
-																<input type="text" id="l_password" name="l_password" placeholder="Password">
+
+                                                                {{ form.password }}
 																<a class="input_add_on" href="#"><i class="fa fa-lock"></i></a>
+                                                                <p class="text-warning">{{ form.password.errors }}</p>
 															</div>
 														</div>
 
@@ -60,17 +66,22 @@
 
 										<div role="tabpanel" class="tab-pane" id="create_account">
 											<div class="tab_item_content">
+                                                <form action="{% url 'mail:registration' %}" method="post">
+                                                        {% csrf_token %}
 												<div class="reg_content active_ac">
-													<form action="post">
+
 
 														<div class="form-group">
-															<input type="text" id="f_name" name="f_name" placeholder="First Name">
+															{{ rform.first_name }}
 															<a class="input_add_on" href="#"><i class="fa fa-user"></i></a>
+                                                            <p class="text-warning">{{ rform.first_name.errors }}</p>
 														</div>
 
 														<div class="form-group">
-															<input type="text" id="f_name" name="f_name" placeholder="First Name">
+                                                            {{ rform.last_name }}
 															<a class="input_add_on" href="#"><i class="fa fa-user"></i></a>
+                                                             <p class="text-warning">{{ rform.last_name.errors }}</p>
+
 														</div>
 
 														<div class="form-group">
@@ -78,30 +89,39 @@
 																<span class="country_code">
 																	<a href="#">00965 <i class="fa fa-angle-down"></i></a>
 																</span>
-																<input type="text" id="ac_mobile" name="ac_mobile" placeholder="Mobile">
+																{{ rform.phone_number }}
 																<a class="input_add_on" href="#"><i class="fa fa-phone"></i></a>
+                                                                <p class="text-warning">{{ rform.phone_number.errors }}</p>
 															</div>
 														</div>
 
 														<div class="form-group">
 															<div class="password">
-																<input type="text" id="l_password" name="l_password" placeholder="Password">
+                                                                {{ rform.password1 }}
 																<a class="input_add_on" href="#"><i class="fa fa-lock"></i></a>
+                                                                <p class="text-warning">{{ rform.password1.errors }}</p>
 															</div>
 														</div>
-													</form>
+                                                        <div class="form-group">
+															<div class="password">
+                                                                {{ rform.password2 }}
+																<a class="input_add_on" href="#"><i class="fa fa-lock"></i></a>
+                                                                <p class="text-warning">{{ rform.password2.errors }}</p>
+															</div>
+														</div>
 												</div><!-- /reg_content -->
 
 												<div class="get_activation_code">
 													<div class="pro_pics">
-														<a href="#"><i class="fa fa-camera"></i> <span>Your Photo</span></a>
+														<a href="#">{{ rform.avatar }}    <i class="fa fa-camera"></i></a>
 													</div>
 													<p>Your mobile is your username including country code You will receive the activation code by SMS to your mobile</p>
 
 													<span class="terms">By registering, I accept the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></span>
 
-													<a class="button" href="#">Get the activation code</a>
+													<a class="button" href="#"><button type="submit">Get the activation code</button></a>
 												</div>
+                                                </form>
 											</div>
 										</div>
 									</div>

@@ -17,6 +17,10 @@ body{
     color: #6a6a6a;
 }
 
+.errorlist{
+  color: #c09853;
+  font-weight: bold;
+}
 
 *, *:after, *::before{
     -webkit-box-sizing: border-box;

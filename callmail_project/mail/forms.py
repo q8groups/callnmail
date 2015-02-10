@@ -7,10 +7,12 @@ from advertisement.models import UserProfile
 
 
 class RegistrationForm(forms.ModelForm):
-    phone_number = forms.IntegerField()
-    password1 = forms.CharField(widget=forms.PasswordInput, label='Password')
-    password2 = forms.CharField(widget=forms.PasswordInput, label='Password (Again)')
-
+    first_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'First Name'}), required=False)
+    last_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Last Name'}), required=False)
+    phone_number = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'Mobile', 'required': 'true'}),
+                                      required=False)
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password', 'required': 'true'}))
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Repeat Password', 'required': 'true'}))
 
     def clean_phone_number(self):
         phone_number = self.cleaned_data.get('phone_number')
@@ -35,11 +37,12 @@ class RegistrationForm(forms.ModelForm):
 
     class Meta:
         model = UserProfile
-        exclude = ('user',)
+        fields = ('first_name', 'last_name', 'phone_number', 'avatar', 'password1', 'password2')
+
 
 class LoginForm(forms.Form):
-    phone_number = forms.IntegerField()
-    password = forms.CharField(widget=forms.PasswordInput)
+    phone_number = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'Mobile', 'required': 'true'}))
+    password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Password', 'required': 'true'}))
 
 
 class PasswordResetRequestForm(forms.Form):
