@@ -7,6 +7,7 @@
                                 {% if user.is_authenticated %}
                                 <li><a href="{% url 'mail:logout' %}">Logout</a></li>
                                 {% else %}
+                                  <li><a href="{% url 'mail:login' %}">Login/Sign up</a></li>
                                 {% endif %}
 								<li><a href="{% url 'mail:contact' %}">Contact</a></li>
 							</ul>

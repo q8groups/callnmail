@@ -1,7 +1,8 @@
 from django.conf.urls import patterns, include, url
 
 from .views import HomePage, RegistrationView, LoginView, MailListView, MailDetailView, download_attachment, PasswordResetView, PasswordResetRequestView, MailForwardCreateView, MailForwardListView, \
-    AboutView, ActivateUser, ContactView, FAQView, PrivacyView, ProfileView, PasswordChangeView, LogoutView
+    AboutView, ActivateUser, ContactView, FAQView, PrivacyView, ProfileView, PasswordChangeView, LogoutView, \
+    ChangeAvatar
 
 urlpatterns = patterns('',
     url(r'^$', HomePage.as_view(), name='index'),
@@ -22,6 +23,7 @@ urlpatterns = patterns('',
     url(r'^change-password/$', PasswordChangeView.as_view(), name='change_password'),
     url(r'^mail-forward/$', MailForwardListView.as_view(), name='mailforward_list'),
     url(r'^mail-forward-create/$', MailForwardCreateView.as_view(), name='mailforward_create'),
+    url(r'^change-avatar/$', ChangeAvatar.as_view(), name='change_avatar'),
 
 )
 

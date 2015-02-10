@@ -4,12 +4,13 @@
 <section id="main_content" class="sec_profile">
 			<div class="container">
 				<div class="box_container">
-					<form method="post" action="">
-                        {% csrf_token %}
+
 						<div class="row">
 							<div class="col-md-4 col-sm-5">
 								{% include 'profile_part.html' %}
 							</div><!-- /p_content -->
+                            <form method="post" action="">
+                        {% csrf_token %}
 							<div class="col-md-8 col-sm-7">
 								<div class="edit_profile">
 									<div class="sec_title"><h2>My profile</h2></div>

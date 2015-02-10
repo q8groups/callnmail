@@ -79,7 +79,7 @@
 						<div class="footer_menu">
 							<ul>
 								<li><a href="{% url 'mail:about' %}">About</a></li>
-                                {% if request.user.is_authenticated %}
+                                {% if user.is_authenticated %}
                                 <li><a href="{% url 'mail:logout' %}">Logout</a></li>
                                 {% else %}
 								<li><a href="{% url 'mail:login' %}">Login/Sign up</a></li>

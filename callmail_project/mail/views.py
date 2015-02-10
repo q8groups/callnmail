@@ -119,7 +119,7 @@ class LogoutView(generic.View):
         return HttpResponseRedirect('/')
 
 
-class ProfileView(generic.View):
+class ProfileView(LoginRequiredMixin, generic.View):
     def get(self, request):
         data = {'gender': request.user.userprofile.gender, 'age': request.user.userprofile.age,
                 'country': request.user.userprofile.country}
@@ -299,3 +299,18 @@ class FAQView(generic.TemplateView):
 
 class PrivacyView(generic.TemplateView):
     template_name = 'privacy.html'
+
+
+class ChangeAvatar(LoginRequiredMixin, generic.View):
+    def get(self, request):
+        return HttpResponseRedirect(reverse('mail:profile'))
+
+    def post(self, request):
+        avatar = request.POST.get('avatar')
+        path = request.POST.get('path')
+        if avatar:
+            profile = get_object_or_404(UserProfile, user=request.user)
+            profile.avatar = avatar
+            profile.save()
+            messages.success(request, 'Profile Avatar successfully changed.')
+        return HttpResponseRedirect(path)
