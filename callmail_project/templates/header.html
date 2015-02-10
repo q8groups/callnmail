@@ -4,7 +4,10 @@
 						<div class="menu">
 							<ul>
 								<li><a href="{% url 'mail:about' %}">About</a></li>
-								<li><a href="{% url 'mail:login' %}">Login/Sign up</a></li>
+                                {% if user.is_authenticated %}
+                                <li><a href="{% url 'mail:logout' %}">Logout</a></li>
+                                {% else %}
+                                {% endif %}
 								<li><a href="{% url 'mail:contact' %}">Contact</a></li>
 							</ul>
 						</div>

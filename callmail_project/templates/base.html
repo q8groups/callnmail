@@ -9,10 +9,10 @@
 
 	<!-- Fevicon -->
 	<link rel="icon" href="favicon.png" type="png" />
-	
+
 	<!-- bootstrap -->
 	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
-	
+
 	<!-- fonts -->
 	<link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/fonts.css' %}">
@@ -77,8 +77,12 @@
 						<div class="footer_menu">
 							<ul>
 								<li><a href="{% url 'mail:about' %}">About</a></li>
+                                {% if request.user.is_authenticated %}
+                                <li><a href="{% url 'mail:logout' %}">Logout</a></li>
+                                {% else %}
 								<li><a href="{% url 'mail:login' %}">Login/Sign up</a></li>
-								<li><a href="#">FAQ</a></li>
+								{% endif %}
+                                <li><a href="#">FAQ</a></li>
 								<li><a href="#">Privacy Policy</a></li>
 								<li><a href="{% url 'mail:contact' %}">Contact Us</a></li>
 							</ul>

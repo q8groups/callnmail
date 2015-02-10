@@ -18,12 +18,17 @@ from .models import Mail, MailAttachment, ForgotPasswordToken, MailForward, Acco
 from advertisement.models import UserProfile
 
 
-class HomePage(generic.TemplateView):
-    template_name = 'index.html'
+class HomePage(generic.View):
+    def get(self, request):
+        if request.user.is_authenticated():
+            return HttpResponseRedirect(reverse('mail:mailforward_list'))
+        return render(request, 'index.html')
 
 
 class RegistrationView(generic.View):
     def get(self, request):
+        if request.user.is_authenticated():
+            return HttpResponseRedirect(reverse('mail:mailforward_list'))
         rform = RegistrationForm()
         form = LoginForm()
         return render(request, 'registration.html', {'form': form, 'rform': rform})
@@ -82,6 +87,8 @@ class RegistrationView(generic.View):
 
 class LoginView(generic.View):
     def get(self, request):
+        if request.user.is_authenticated():
+            return HttpResponseRedirect(reverse('mail:mailforward_list'))
         form = LoginForm()
         #from django.core.mail import EmailMessage
         #email = EmailMessage('Hello', 'This is the bodysss', 'hell@localhost', ['admin@localhost'])
@@ -104,6 +111,12 @@ class LoginView(generic.View):
 
         else:
             return render(request, 'login.html', {'form': form})
+
+
+class LogoutView(generic.View):
+    def get(self, request):
+        logout(request)
+        return HttpResponseRedirect('/')
 
 
 class ProfileView(generic.View):

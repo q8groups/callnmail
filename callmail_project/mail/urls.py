@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 
 from .views import HomePage, RegistrationView, LoginView, MailListView, MailDetailView, download_attachment, PasswordResetView, PasswordResetRequestView, MailForwardCreateView, MailForwardListView, \
-    AboutView, ActivateUser, ContactView, FAQView, PrivacyView, ProfileView, PasswordChangeView
+    AboutView, ActivateUser, ContactView, FAQView, PrivacyView, ProfileView, PasswordChangeView, LogoutView
 
 urlpatterns = patterns('',
     url(r'^$', HomePage.as_view(), name='index'),
@@ -13,6 +13,7 @@ urlpatterns = patterns('',
     url(r'^register/$', RegistrationView.as_view(), name='registration'),
     url(r'^activate/$', ActivateUser.as_view(), name='activate_user'),
     url(r'^login/$', LoginView.as_view(), name='login'),
+    url(r'^logout/$', LogoutView.as_view(), name='logout'),
     url(r'^mail/$', MailListView.as_view(), name='mail_list'),
     url(r'^mail/(?P<pk>\d+)/$', MailDetailView.as_view(), name='mail_detail'),
     url(r'^download/(?P<pk>\d+)/$', download_attachment, name='download_attachment'),
