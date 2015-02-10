@@ -4,7 +4,8 @@
 <section id="main_content" class="sec_profile">
 			<div class="container">
 				<div class="box_container">
-					<form action="post">
+					<form method="post" action="">
+                        {% csrf_token %}
 						<div class="row">
 							<div class="col-md-4 col-sm-5">
 								{% include 'profile_part.html' %}
@@ -14,28 +15,29 @@
 									<div class="sec_title"><h2>My profile</h2></div>
 									<div class="p_content sec_half_left">
 										<div class="custom_input_row input_sex">
-											<label for="">Gender</label>
-											<span><input type="radio" name="sex" value="male">Male</span>
-											<span><input type="radio" name="sex" value="female">Female</span>
+                                            <label for="">Gender</label>
+											{{ form.gender }}
+                                            <p class="text-warning">{{ form.gender.errors }}</p>
 										</div><!-- /custom_input_row -->
 
 										<div class="custom_input_row">
-											<label for="">Brithday</label>
+											<label for="">Birthday</label>
 											<div class="input_birthday">
-												<span><input type="text" name="dd" id="dd" placeholder="DD" /></span>
-												<span><input type="text" name="mm" id="mm" placeholder="MM" /></span>
-												<span><input type="text" name="yyyy" id="yyyy" placeholder="YYYY" /></span>
+                                                {{ form.age }}
+                                                <p class="text-warning">{{ form.age.errors }}</p>
 											</div>
 										</div><!-- /custom_input_row -->
 										<div class="custom_input_row">
-											<input type="text" name="nationality" id="nationality" placeholder="Nationality Kuwaiti" />
+                                            <label for="">Nationality</label>
+                                            {{ form.country }}
+                                                <p class="text-warning">{{ form.country.errors }}</p>
 										</div><!-- /custom_input_row -->
 									</div><!-- /p_content -->
 
 									<div class="p_content sec_half_right">
 										<div class="edit_panel">
 											<a href="{% url 'mail:change_password' %}">Change Password</a>
-											<a class="button" href="#">Save Changes</a>
+											<button class="button" type="submit">Save Changes</button>
 										</div>
 									</div><!-- /p_content -->
 								</div><!-- /edit_profile -->

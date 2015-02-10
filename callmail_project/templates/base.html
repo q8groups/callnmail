@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load bootstrap3 %}
 <html lang="en">
 <head>
 	<meta charset="utf-8">
@@ -46,7 +47,8 @@
                     {% endblock %}
                 </div>
 			</header><!-- /header -->
-
+            {% bootstrap_javascript jquery=1 %}
+{% bootstrap_messages FIXTHIS %}
             {% block content %}
 
             {% endblock %}

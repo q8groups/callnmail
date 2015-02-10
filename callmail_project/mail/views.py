@@ -12,7 +12,7 @@ from django.conf import settings
 from braces.views import LoginRequiredMixin
 
 from .forms import RegistrationForm, LoginForm, PasswordResetRequestForm, PasswordResetForm, ActivateForm, \
-    ChangePasswordForm
+    ChangePasswordForm, ProfileChangeForm
 from .utils import send_sms, determine_mime_type, generate_random_number
 from .models import Mail, MailAttachment, ForgotPasswordToken, MailForward, AccountActivation
 from advertisement.models import UserProfile
@@ -121,23 +121,29 @@ class LogoutView(generic.View):
 
 class ProfileView(generic.View):
     def get(self, request):
-        return render(request, 'profile.html')
+        data = {'gender': request.user.userprofile.gender, 'age': request.user.userprofile.age,
+                'country': request.user.userprofile.country}
+        form = ProfileChangeForm(initial=data)
+        return render(request, 'profile.html', {'form': form})
 
     def post(self, request):
-        form = LoginForm(request.POST or None)
+        form = ProfileChangeForm(request.POST or None)
         if form.is_valid():
-            username = request.POST.get('phone_number')
-            password = request.POST.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None and user.is_active:
-                login(request, user)
-                return HttpResponseRedirect('/')
-
-            else:
-                return render(request, 'login.html', {'form': form, 'error': 'Username or password not correct.'})
-
+            gender = request.POST.get('gender')
+            birthday = request.POST.get('password')
+            country = request.POST.get('country')
+            profile = get_object_or_404(UserProfile, user=request.user)
+            if gender:
+                profile.gender = gender
+            if birthday:
+                profile.age = birthday
+            if country:
+                profile.country = country
+            profile.save()
+            messages.success(request, 'Profile successfully updated.')
+            return HttpResponseRedirect(reverse('mail:profile'))
         else:
-            return render(request, 'login.html', {'form': form})
+            return render(request, 'profile.html', {'form': form})
 
 
 class ActivateUser(generic.View):

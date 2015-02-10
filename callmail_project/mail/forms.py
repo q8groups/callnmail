@@ -109,3 +109,9 @@ class ChangePasswordForm(forms.Form):
             if password1 != password2:
                 raise forms.ValidationError("The two password fields didn't match.")
         return self.cleaned_data
+
+
+class ProfileChangeForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ('gender', 'age', 'country')
