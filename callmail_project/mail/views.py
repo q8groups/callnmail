@@ -11,7 +11,8 @@ from django.conf import settings
 
 from braces.views import LoginRequiredMixin
 
-from .forms import RegistrationForm, LoginForm, PasswordResetRequestForm, PasswordResetForm, ActivateForm
+from .forms import RegistrationForm, LoginForm, PasswordResetRequestForm, PasswordResetForm, ActivateForm, \
+    ChangePasswordForm
 from .utils import send_sms, determine_mime_type, generate_random_number
 from .models import Mail, MailAttachment, ForgotPasswordToken, MailForward, AccountActivation
 from advertisement.models import UserProfile
@@ -34,7 +35,7 @@ class RegistrationView(generic.View):
             password = request.POST.get('password1')
             first_name = request.POST.get('first_name')
             last_name = request.POST.get('last_name')
-            avatar = request.POST.get('avatar')
+            avatar = request.FILES.get('avatar')
             # gender = request.POST.get('gender')
             # age_group = request.POST.get('age_group')
             # country = request.POST.get('country')
@@ -87,6 +88,27 @@ class LoginView(generic.View):
         #email.attach_file('/home/sachitad/hi.py')
         #email.send(fail_silently=False)
         return render(request, 'login.html', {'form': form, 'rform': RegistrationForm()})
+
+    def post(self, request):
+        form = LoginForm(request.POST or None)
+        if form.is_valid():
+            username = request.POST.get('phone_number')
+            password = request.POST.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None and user.is_active:
+                login(request, user)
+                return HttpResponseRedirect('/')
+
+            else:
+                return render(request, 'login.html', {'form': form, 'error': 'Username or password not correct.'})
+
+        else:
+            return render(request, 'login.html', {'form': form})
+
+
+class ProfileView(generic.View):
+    def get(self, request):
+        return render(request, 'profile.html')
 
     def post(self, request):
         form = LoginForm(request.POST or None)
@@ -190,6 +212,28 @@ class PasswordResetView(generic.View):
 
         else:
             return render(request, 'password_reset_form.html', {'form': form})
+
+
+class PasswordChangeView(LoginRequiredMixin, generic.View):
+    def get(self, request):
+        return render(request, 'change_password.html', {'form': ChangePasswordForm()})
+
+
+    def post(self, request):
+        form = ChangePasswordForm(request.POST)
+        if form.is_valid():
+            password = request.POST.get('new_password1')
+            old_password = request.POST.get('old_password')
+
+            if not request.user.check_password(old_password):
+                return render(request, 'change_password.html', {'form': form, 'error': 'Invalid old password.'})
+            request.user.set_password(password)
+            request.user.save()
+            messages.success(request, 'Password successfully changed')
+            return HttpResponseRedirect(reverse('mail:profile'))
+
+        else:
+            return render(request, 'change_password.html', {'form': form})
 
 
 def download_attachment(request, pk):

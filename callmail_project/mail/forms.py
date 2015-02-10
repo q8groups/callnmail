@@ -96,3 +96,16 @@ class PasswordResetForm(forms.Form):
                 raise forms.ValidationError("The two password fields didn't match.")
         return self.cleaned_data
 
+
+class ChangePasswordForm(forms.Form):
+    old_password = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Old Password', 'required': 'true'}))
+    new_password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'New Password', 'required': 'true'}))
+    new_password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Repeat New Password', 'required': 'true'}))
+
+    def clean(self):
+        password1 = self.cleaned_data.get('new_password1')
+        password2 = self.cleaned_data.get('new_password2')
+        if password1:
+            if password1 != password2:
+                raise forms.ValidationError("The two password fields didn't match.")
+        return self.cleaned_data
