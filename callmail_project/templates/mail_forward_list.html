@@ -1,18 +1,44 @@
-{% extends "base.html" %}
-
+{% extends 'base.html' %}
+{% load static %}
 {% block content %}
-        <h3 class="text-success">Mail Forward Emails</h3><br />
-    <table class="table">
-        {% if emails %}
-        <tr>
-            <td>Email</td>
-        </tr>
-        {% for mail in emails %}
-        <tr>
-            <td>{{ mail.email }}</td></a>
-        </tr>
-        {% endfor %}
-        {% endif %}
-    </table>
-        <a href="{% url 'mail:mailforward_create' %}"><button class="btn btn-success">Add</button></a>
+    <section id="main_content" class="sec_profile">
+			<div class="container">
+				<div class="box_container">
+						<div class="row">
+							<div class="col-md-4 col-sm-5">
+                            {% include 'profile_part.html' %}
+							</div><!-- /p_content -->
+							<div class="col-md-8 col-sm-7">
+								<div class="create_new_link">
+									<div class="p_content sec_half_left">
+										<ul class="email_list">
+                                        {% for mail in emails %}
+											<li><input type="text" name="myhotmail" id="myhotmail{{ forloop.counter }}" placeholder="{{ mail.email }}" readonly/></li>
+                                            {% endfor %}
+										</ul>
+										<div class="create_link">
+											<a href="{% url 'mail:mailforward_create' %}"><i class="fa fa-plus"></i> Link new email address</a>
+										</div>
+									</div><!-- /p_content -->
+
+									<div class="p_content sec_half_right">
+										<div class="edit_panel">
+											<a class="button" href="#">My Profile</a>
+										</div>
+									</div><!-- /p_content -->
+								</div><!-- /change_pass -->
+							</div>
+						</div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="app_store">
+							<a href="#"><img src="{% static 'images/icon_app_store.png' %}" alt="app_store"></a>
+							<a href="#"><img src="{% static 'images/icon_app_google_play.png' %}" alt="google_play"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 {% endblock content %}

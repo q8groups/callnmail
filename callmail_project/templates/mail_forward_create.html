@@ -1,11 +1,45 @@
-{% extends "base.html" %}
-{% load bootstrap3 %}
+{% extends 'base.html' %}
+{% load static %}
 {% block content %}
-    <h3 class="text-success">Login</h3>
-    <hr />
-    <form action="" method="post">
-        {% csrf_token %}
-        {% bootstrap_form form %}
-        <button type="submit" class="btn btn-success">Add Forward Email</button>
-    </form>
+    <section id="main_content" class="sec_profile">
+			<div class="container">
+				<div class="box_container">
+						<div class="row">
+							<div class="col-md-4 col-sm-5">
+								  {% include 'profile_part.html' %}
+							</div><!-- /p_content -->
+                            <form method="post" action="">
+                            {% csrf_token %}
+							<div class="col-md-8 col-sm-7">
+                                <div class="reg_content">
+                                    <div class="sec_title"><h2>Link New Email Address</h2></div>
+                                    <br /><br />
+													<form action="" method="post">
+                                                        {% csrf_token %}
+														<div class="form-group">
+															<div class="active_code">
+                                                                {{ form.email }}
+																<a class="input_add_on" href="#"><i class="fa fa-lock"></i></a>
+                                                                <p class="text-warning">{{ form.email.errors }}</p>
+															</div>
+														</div>
+
+														<button type="submit" class="button">Save</button>
+													</form>
+												</div>
+							</div>
+                           </form>
+						</div>
+				</div>
+
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="app_store">
+							<a href="#"><img src="{% static 'images/icon_app_store.png' %}" alt="app_store"></a>
+							<a href="#"><img src="{% static 'images/icon_app_google_play.png' %}" alt="google_play"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 {% endblock content %}

@@ -1,0 +1,10 @@
+<div class="p_content">
+									<div class="profile_pics">
+                                        {% if user.avatar %}
+										<img src="{{ user.avatar.url }}" alt="profile_img">
+                                        {% endif %}
+										<a class="change_pic" href="#">Change</a>
+									</div>
+									<span class="name">{% if user.first_name or user.last_name %}{{ user.firstname }} {{ user.last_name }}
+                                        {% else %}{{ user }}{% endif %}</span>
+								</div>
