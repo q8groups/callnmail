@@ -1,11 +1,14 @@
 from django.conf.urls import patterns, include, url
 
 from .views import HomePage, RegistrationView, LoginView, MailListView, MailDetailView, download_attachment, PasswordResetView, PasswordResetRequestView, MailForwardCreateView, MailForwardListView, \
-    AboutView, ActivateUser
+    AboutView, ActivateUser, ContactView, FAQView, PrivacyView
 
 urlpatterns = patterns('',
     url(r'^$', HomePage.as_view(), name='index'),
     url(r'^about/$', AboutView.as_view(), name='about'),
+    url(r'^contact/$', ContactView.as_view(), name='contact'),
+    url(r'^faq/$', FAQView.as_view(), name='faq'),
+    url(r'^privacy/$', PrivacyView.as_view(), name='privacy'),
     url(r'^register/$', RegistrationView.as_view(), name='registration'),
     url(r'^activate/$', ActivateUser.as_view(), name='activate_user'),
     url(r'^login/$', LoginView.as_view(), name='login'),

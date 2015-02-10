@@ -2,11 +2,11 @@
 <div class="sidebar">
                         <div class="widget">
                             <ul class="sidebar_menu">
-                                <li class="active"><a href="{% url 'mail:about' %}">About</a></li>
+                                <li {% if request.path == '/about/' %}class="active"{% endif %}><a href="{% url 'mail:about' %}">About</a></li>
                                 <li><a href="{% url 'mail:login' %}">Login/Sign up</a></li>
-                                <li><a href="#">FAQ</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                                <li><a href="contact.html">Contact Us</a></li>
+                                <li {% if request.path == '/faq/' %}class="active"{% endif %}><a href="{% url 'mail:faq' %}">FAQ</a></li>
+                                <li {% if request.path == '/privacy/' %}class="active"{% endif %}><a href="{% url 'mail:privacy' %}">Privacy Policy</a></li>
+                                <li {% if request.path == '/contact/' %}class="active"{% endif %}><a href="{% url 'mail:contact' %}">Contact Us</a></li>
                             </ul>
                         </div>
                         <!-- /widget -->

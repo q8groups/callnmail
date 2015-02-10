@@ -224,3 +224,15 @@ class MailForwardCreateView(LoginRequiredMixin, generic.CreateView):
 
 class AboutView(generic.TemplateView):
     template_name = 'about.html'
+
+
+class ContactView(generic.TemplateView):
+    template_name = 'contact.html'
+
+
+class FAQView(generic.TemplateView):
+    template_name = 'faq.html'
+
+
+class PrivacyView(generic.TemplateView):
+    template_name = 'privacy.html'
