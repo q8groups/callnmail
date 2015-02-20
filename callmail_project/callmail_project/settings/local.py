@@ -9,7 +9,7 @@ from .base import *
 
 ########## DEBUG CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#debug
-DEBUG = True
+DEBUG = False
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#template-debug
 TEMPLATE_DEBUG = DEBUG
@@ -52,6 +52,14 @@ REST_FRAMEWORK = {
        'rest_framework.authentication.TokenAuthentication',
    ),
    'PAGINATE_BY': 10,
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+        ),
+
+    'DEFAULT_RENDERER_CLASSES': (
+                'rest_framework.renderers.JSONRenderer',
+
+        )
 }
 
 
