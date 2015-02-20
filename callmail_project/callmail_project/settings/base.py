@@ -220,7 +220,7 @@ THIRD_PARTY_APPS = (
     'gunicorn',
     'rest_framework',
     'rest_framework.authtoken',
-    'rest_framework_swagger',
+    #'rest_framework_swagger',
     'django_mailbox',
     "djrill",
     'django_extensions',
@@ -314,3 +314,18 @@ AWS_STORAGE_BUCKET_NAME='callnmail'
 #AWS_S3_CUSTOM_DOMAIN = 'cdn.sharai.net'
 AWS_S3_SECURE_URLS = False
 AWS_QUERYSTRING_AUTH = False
+
+
+REST_FRAMEWORK = {
+
+
+
+    'DEFAULT_PARSER_CLASSES': (
+        'rest_framework.parsers.JSONParser',
+        ),
+
+    'DEFAULT_RENDERER_CLASSES': (
+                'rest_framework.renderers.JSONRenderer',
+
+        )
+}
