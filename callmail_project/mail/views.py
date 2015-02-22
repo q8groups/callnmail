@@ -8,11 +8,12 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.core.urlresolvers import reverse, reverse_lazy
 from django.conf import settings
+from django.contrib.messages.views import SuccessMessageMixin
 
 from braces.views import LoginRequiredMixin
 
 from .forms import RegistrationForm, LoginForm, PasswordResetRequestForm, PasswordResetForm, ActivateForm, \
-    ChangePasswordForm, ProfileChangeForm
+    ChangePasswordForm, ProfileChangeForm, ContactUsForm
 from .utils import send_sms, determine_mime_type, generate_random_number
 from .models import Mail, MailAttachment, ForgotPasswordToken, MailForward, AccountActivation
 from advertisement.models import UserProfile
@@ -289,8 +290,11 @@ class AboutView(generic.TemplateView):
     template_name = 'about.html'
 
 
-class ContactView(generic.TemplateView):
+class ContactView(SuccessMessageMixin, generic.CreateView):
     template_name = 'contact.html'
+    form_class = ContactUsForm
+    success_url = reverse_lazy('mail:contact')
+    success_message = 'Thank you for contacting us. We will get back to you shortly.'
 
 
 class FAQView(generic.TemplateView):

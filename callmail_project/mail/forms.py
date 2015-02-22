@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 
 
-from .models import ForgotPasswordToken
+from .models import ForgotPasswordToken, ContactUs
 from advertisement.models import UserProfile
 
 
@@ -115,3 +115,15 @@ class ProfileChangeForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('gender', 'age', 'country')
+
+
+class ContactUsForm(forms.ModelForm):
+    class Meta:
+        model = ContactUs
+        widgets = {
+            'name': forms.TextInput(attrs={'placeholder': 'Name'}),
+            'contact_email': forms.TextInput(attrs={'placeholder': 'Contact Email'}),
+            'subject': forms.TextInput(attrs={'placeholder': 'Subject'}),
+            'message': forms.Textarea(attrs={'placeholder': 'Message'}),
+
+        }

@@ -55,10 +55,21 @@ class ForgotPasswordToken(models.Model):
 class MailForward(models.Model):
     user = models.ForeignKey(User)
     email = models.EmailField()
-    title= models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
 
     def __unicode__(self):
         return self.email
+
+
+class ContactUs(models.Model):
+    name = models.CharField(max_length=255)
+    contact_email = models.EmailField()
+    subject = models.CharField(max_length=255)
+    message = models.TextField()
+
+    def __unicode__(self):
+        return self.name
+
 
 def fetch_email(message):
     user_phonenumber = message.to_addresses[0].split('@')[0]

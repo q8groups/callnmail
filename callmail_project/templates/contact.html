@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load bootstrap3 %}
 {% block content %}
+
+<style type="text/css">
+    label {
+        display: none;
+    }
+</style>
 <section id="main_content" class="bg_gray contact">
 			<div class="container">
 				<div class="sec_up">
@@ -13,20 +20,18 @@
 										<p>Please use the contact form on the right side if you have any questions or requests, concerning our services.</p>
 									</div><!-- /page_title -->
 								</div>
-
+                                   <div class="text-center">{% bootstrap_messages FIXTHIS %}</div>
 								<div class="row_block bg_gray">
 									<div class="contact_us">
 										<div class="row">
 											<div class="col-md-8">
 												<div class="contact_form">
-													<form>
+													<form action="" method="post">
+                                                        {% csrf_token %}
 														<div class="form-group">
-															<input type="text" id="name" name="name" placeholder="Name">
-															<input type="email" id="email" name="email" placeholder="Contact Email">
-															<input type="text" id="subject" name="subject" placeholder="Subject">
-															<textarea name="message" id="message" placeholder="Message" rows="5"></textarea>
+                                                            {{ form }}
 															<div class="cf_btn_group">
-																<button type="submit" class="button reset">Reset</button>
+																<button type="reset" class="button reset">Reset</button>
 																<button type="submit" class="button">Submit</button>
 															</div>
 														</div>
@@ -36,7 +41,7 @@
 											<div class="col-md-4">
 												<div class="contact_info">
 													<div class="row_block">
-														<p><span class="add_title">Contact Detailes </span><br><a href="mailto:registration@ted.com">registration@ted.com</a><br> Tel: <a href="tel:7783408872">778.340.8872</a></p>
+														<p><span class="add_title">Contact Details </span><br><a href="mailto:registration@ted.com">registration@ted.com</a><br> Tel: <a href="tel:7783408872">778.340.8872</a></p>
 													</div>
 													<div class="row_block">
 														<p><span class="add_title">Headquarters</span><br> TED Conferences, LLC<br> 250 Hudson St.<br> Suite 1002<br> New York, NY 10013</p>

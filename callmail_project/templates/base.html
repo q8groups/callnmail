@@ -48,7 +48,9 @@
                 </div>
 			</header><!-- /header -->
             {% bootstrap_javascript jquery=1 %}
-{% bootstrap_messages FIXTHIS %}
+            {% if request.path != '/contact/' %}
+            {% bootstrap_messages FIXTHIS %}
+            {% endif %}
             {% block content %}
 
             {% endblock %}
