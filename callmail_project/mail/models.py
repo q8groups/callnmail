@@ -19,6 +19,12 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
         Token.objects.create(user=instance)
 
 
+@receiver(post_save, sender=User)
+def create_auth_token(sender, instance=None, created=False, **kwargs):
+    if created:
+        UserProfile.objects.create(user=instance)
+
+
 class Mail(models.Model):
     user = models.ForeignKey(User)
     from_user = models.EmailField()

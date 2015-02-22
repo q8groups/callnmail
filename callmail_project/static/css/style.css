@@ -974,7 +974,7 @@ select:-webkit-autofill {
     position: relative;
     border: 2px solid #c021ce;
 }
-.get_activation_code .pro_pics a{
+.get_activation_code .pro_pics #test{
     position: absolute;
     width: 120px;
     top: 40px;
@@ -984,11 +984,11 @@ select:-webkit-autofill {
     color: #fff;
     left: 0;
 }
-.get_activation_code .pro_pics a i{
+.get_activation_code .pro_pics #test i{
     font-size: 24px;
     margin-bottom: 5px;
 }
-.get_activation_code .pro_pics a span{
+.get_activation_code .pro_pics #test span{
     display: block;
     font-family: 'AvenirLT-Light';
 }
