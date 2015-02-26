@@ -75,8 +75,8 @@ class RegistrationView(generics.CreateAPIView):
                 user.first_name = first_name
                 user.last_name = last_name
                 user.save()
-                profile = UserProfile.objects.get_or_create(user=user, avatar=avatar, country=country.upper())
-                profile.save()
+                #profile = UserProfile.objects.get_or_create(user=user, avatar=avatar, country=country.upper())
+                #profile.save()
                 random_number = generate_random_number()
                 TokenValidation.objects.create(user=user, secret_token=random_number)
                 send_sms(phone_number, 'Your activation code is ' + str(random_number))
