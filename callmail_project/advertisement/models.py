@@ -22,7 +22,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
     gender = models.CharField(max_length=1, choices=GENDER, help_text="M for Male F for Female", blank=True)
     age = models.DateField(blank=True, null=True)
-    avatar = models.ImageField(upload_to="avatar/", blank=True)
+    avatar = models.ImageField(upload_to="avatar/", default='default.png', blank=True)
     # age_group = models.CharField(max_length=10, choices=AGE_GROUP, help_text="Age groups are: 1-5, 6-14, 15-25, ""25-45, 45+")
     country = CountryField(help_text="Country names are taken from the official ISO 3166-1 list. "
                                      "See: http://en.wikipedia.org/wiki/ISO_3166-1")
