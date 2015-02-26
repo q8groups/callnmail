@@ -105,8 +105,8 @@ def fetch_email(message):
                         for j in i:
                            forward_list.append(j)
 
-                    subject = message.subject
-                    from_email = message.to_addresses[0]
+                    subject = message.subject+' Via CallNMail'
+                    from_email = message.from_address[0]
                     headers = {'Reply-To': message.from_address[0]}
                     msg = EmailMultiAlternatives(subject, text_content, from_email, forward_list,headers=headers)
                     msg.attach_alternative(html_content, "text/html")
