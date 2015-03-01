@@ -6,7 +6,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.mail import EmailMultiAlternatives
 
-from .utils import send_sms
+from .utils import send_sms, find_age_group
 from advertisement.models import UserProfile, Advertisement
 
 from django_mailbox.signals import message_received
@@ -88,12 +88,20 @@ def fetch_email(message):
                 #send_sms(user_phonenumber, 'Yo new message waiting for ya, sign up.')
             else:
                 user_profile = UserProfile.objects.get(user=user)
-                advertisement = Advertisement.objects.filter(default=True)
-                if advertisement.exists():
-                    advertisement = advertisement[0].body
+                age = user_profile.age
+                if age:
+                    age_group = find_age_group(age)
+                    advertisement = Advertisement.objects.filter(age_group=age_group)
+                    if advertisement.exists():
+                        advertisement = advertisement[0].body
+                    else:
+                        advertisement = Advertisement.objects.get(default=True)
+                        advertisement = advertisement.body
+
                 else:
                     advertisement = Advertisement.objects.get(default=True)
                     advertisement = advertisement.body
+
                 text_content = message.text + advertisement
                 html_content = message.html + advertisement
                 forward_email = MailForward.objects.filter(user=user)

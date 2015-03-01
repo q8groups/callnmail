@@ -25,7 +25,6 @@ class RegistrationForm(forms.ModelForm):
 
         return phone_number
 
-
     def clean(self):
         password1 = self.cleaned_data.get('password1')
         password2 = self.cleaned_data.get('password2')
