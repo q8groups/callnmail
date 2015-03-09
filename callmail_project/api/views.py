@@ -110,7 +110,7 @@ class PhoneNumberValidateView(generics.CreateAPIView):
                 user.is_active = True
                 user.save()
 
-                token = Token.objects.get_or_create(user=user)
+                token,created = Token.objects.get_or_create(user=user)
                 mail_forwards = MailForward.objects.filter(user=user)
                 mail_forwards_list = []
                 for mail_forwards_object in mail_forwards:
