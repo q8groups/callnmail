@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load country_tags %}
 {% block content %}
     <section id="main_content" class="registration bg_gray">
 			<div class="container">
@@ -30,8 +31,14 @@
                                                         {% csrf_token %}
                                                         <div class="form-group">
 															<div class="cc_phone">
-																<span class="country_code">
-																	<a href="#">00965 <i class="fa fa-angle-down"></i></a>
+																<span class="country_code" name="country_codes">
+                                                                    {% country_code_prefix as codes %}
+                                                                    <select>
+                                                                        {% for code in codes %}
+                                                                        <option>{{ code }}</option>
+                                                                        {% endfor %}
+                                                                    </select>
+{#																	<a href="#">+965 <i class="fa fa-angle-down"></i></a>#}
 																</span>
                                                                     {{ form.phone_number }}
 																<a class="input_add_on" href="#"><i class="fa fa-phone"></i></a>

@@ -34,7 +34,7 @@ class Advertisement(models.Model):
     age_group = models.CharField(max_length=10, choices=AGE_GROUP)
     body = tinymce_models.HTMLField()
     default = models.BooleanField(default=False, unique=True)
-    photo = models.ImageField(upload_to="ads/",blank=True)
+    photo = models.ImageField(upload_to="ads/", blank=True)
 
     def __unicode__(self):
         return '%s %s %s' % (self.country, self.gender, self.age_group)

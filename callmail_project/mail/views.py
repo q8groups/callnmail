@@ -1,6 +1,6 @@
 import os
-import user
 from django.contrib import messages
+from django.db import IntegrityError
 
 from django.shortcuts import render, HttpResponseRedirect, HttpResponse, get_object_or_404
 from django.views import generic
@@ -37,7 +37,13 @@ class RegistrationView(generic.View):
     def post(self, request):
         rform = RegistrationForm(request.POST, request.FILES or None)
         if rform.is_valid():
+            country_codes = request.POST.get('country_codes')
             phone_number = request.POST.get('phone_number')
+            phone_number = country_codes + phone_number
+            if User.objects.filter(username=phone_number, is_active=True).exists():
+                return render(request, 'registration.html', {'form': LoginForm(), 'rform': rform,
+                                                    'number_error': 'User with that phone number already exists.'})
+
             password = request.POST.get('password1')
             first_name = request.POST.get('first_name')
             last_name = request.POST.get('last_name')
@@ -48,10 +54,8 @@ class RegistrationView(generic.View):
             activation_code = generate_random_number()
             message = 'User created for %s. Your activation code is %s' % (phone_number, str(activation_code))
 
-
             try:
                 user = User.objects.get(username=phone_number)
-                # user.is_active = True
                 user.set_password(password)
                 if first_name:
                     user.first_name = first_name
@@ -74,7 +78,10 @@ class RegistrationView(generic.View):
                     user.last_name = last_name
                 user.is_active = False
                 user.save()
-                UserProfile.objects.create(user=user, avatar=avatar)
+                try:
+                    UserProfile.objects.create(user=user, avatar=avatar)
+                except IntegrityError:
+                    pass
                 send_sms(phone_number, message)
 
             activation = AccountActivation.objects.filter(user=user)
@@ -155,7 +162,9 @@ class ActivateUser(generic.View):
     def post(self, request):
         form = ActivateForm(request.POST or None)
         if form.is_valid():
+            country_codes = request.POST.get('country_codes')
             username = request.POST.get('phone_number')
+            username = country_codes + username
             activation_code = request.POST.get('activation_code')
             activation = AccountActivation.objects.filter(user__username=username, activation_code=activation_code)
             if activation.exists():
@@ -197,7 +206,9 @@ class PasswordResetRequestView(generic.View):
         form = PasswordResetRequestForm(request.POST)
         random_number = generate_random_number()
         if form.is_valid():
+            country_codes = request.POST.get('country_codes')
             phone_number = request.POST.get('phone_number')
+            phone_number = country_codes + phone_number
             user_obj = get_object_or_404(User, username=phone_number)
 
             token_check = ForgotPasswordToken.objects.filter(user=user_obj)
@@ -221,7 +232,9 @@ class PasswordResetView(generic.View):
     def post(self, request):
         form = PasswordResetForm(request.POST)
         if form.is_valid():
+            country_codes = request.POST.get('country_codes')
             phone_number = request.POST.get('phone_number')
+            phone_number = country_codes+ phone_number
             password = request.POST.get('new_password1')
             user_obj = get_object_or_404(User, username=phone_number)
             user_obj.set_password(password)

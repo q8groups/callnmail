@@ -16,5 +16,11 @@ class Country(models.Model):
     """
     code = models.CharField(max_length=4,primary_key=True)
     name = models.CharField(max_length=100)
-    prefix = models.CharField(max_length=6,blank=True)
+    prefix = models.CharField(max_length=6, blank=True)
     priority = models.PositiveSmallIntegerField(default=0)
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = 'Countries'
