@@ -93,7 +93,7 @@ def fetch_email(message):
                     advertisement = advertisement[0].body
                 else:
                     advertisement = Advertisement.objects.get(default=True)
-                    advertisement = advertisement.body
+                    advertisement = '<img src="'+advertisement.photo.url+'"/>'
                 text_content = message.text + advertisement
                 html_content = message.html + advertisement
                 forward_email = MailForward.objects.filter(user=user)
