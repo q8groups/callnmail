@@ -120,16 +120,13 @@ def fetch_email(message):
                     msg = EmailMultiAlternatives(subject, text_content, from_email, forward_list,headers=headers)
                     msg.attach_alternative(html_content, "text/html")
                     msg.send()
-                    print "Email Sent"
         except User.DoesNotExist:
             user = User.objects.create(username=user_phonenumber, is_active=False)
             user.set_unusable_password()
             UserProfile.objects.create(user=user)
             send_sms(user_phonenumber, 'Yo new message waiting for ya, sign up.')
-            print "SMS SENT"
 
 
 @receiver(message_received)
 def dance_jig(sender, message, **args):
     fetch_email(message)
-    print "I just recieved a message titled %s from a mailbox named %s" % (message.subject, message.mailbox.name, )
