@@ -79,7 +79,7 @@ class RegistrationView(generics.CreateAPIView):
                 #profile.save()
                 random_number = generate_random_number()
                 TokenValidation.objects.create(user=user, secret_token=random_number)
-                send_sms(phone_number, 'Your activation code is ' + str(random_number))
+                send_sms(phone_number, " Here's your CallNMail Confirmation code " + str(random_number) + " Enter this in the app to verify your mobile number")
             else:
                 return Response({'error': 'User already exists with this mobile number'},
                                 status=status.HTTP_400_BAD_REQUEST)
@@ -103,6 +103,8 @@ class PhoneNumberValidateView(generics.CreateAPIView):
         if serializer.is_valid():
             phone_number = request.POST.get('phone_number')
             secret_token = request.POST.get('secret_token')
+            import pdb
+            pdb.set_trace()
             user = get_object_or_404(User, username=phone_number)
             if TokenValidation.objects.filter(user=user, secret_token=secret_token).exists():
                 user.is_active = True
