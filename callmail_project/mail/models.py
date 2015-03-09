@@ -6,7 +6,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.mail import EmailMultiAlternatives
 
-from .utils import send_sms
+from .utils import send_sms, find_age_group
 from advertisement.models import UserProfile, Advertisement
 
 from django_mailbox.signals import message_received
@@ -100,7 +100,7 @@ def fetch_email(message):
 
                 else:
                     advertisement = Advertisement.objects.get(default=True)
-                    advertisement = '<img src="'+advertisement.photo.url+'"/>'
+                    #uadvertisement = '<img src="'+advertisement.photo.url+'"/>'
                     advertisement = advertisement.body
 
                 text_content = message.text + advertisement
