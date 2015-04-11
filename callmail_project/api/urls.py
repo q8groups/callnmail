@@ -17,7 +17,6 @@ urlpatterns = patterns('',
                        url(r'^country-code/$', CountryCreateView.as_view(), name='country_code'),
                        url(r'^forgot-password/$', ForgetPassword.as_view(), name='forgot_password'),
                        url(r'^forgot-password/(?P<secret_token>.+)/$', ResetPassword.as_view(), name='reset_password'),
-                       url(r'^country-code/$', CountryCreateView.as_view(), name='country_code'),
                        url(r'^change-password/$', ChangePassword.as_view(), name='change_password'),
 
 
