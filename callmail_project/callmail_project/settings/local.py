@@ -25,11 +25,11 @@ TEMPLATE_DEBUG = DEBUG
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'callmail',
-        'USER': 'ubuntu',
-        'PASSWORD': 'nokia6230@',
-        'HOST': 'localhost',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'callnmail',
+        'USER': 'callnmail',
+        'PASSWORD': 'noKia6230',
+        'HOST': 'callnmail.ctgrepj1cb4h.eu-west-1.rds.amazonaws.com',
         'PORT': '',
     }
 }

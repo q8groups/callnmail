@@ -13,6 +13,19 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
+            name='Country',
+            fields=[
+                ('code', models.CharField(max_length=4, serialize=False, primary_key=True)),
+                ('name', models.CharField(max_length=100)),
+                ('prefix', models.CharField(max_length=6, blank=True)),
+                ('priority', models.PositiveSmallIntegerField(default=0)),
+            ],
+            options={
+                'verbose_name_plural': 'Countries',
+            },
+            bases=(models.Model,),
+        ),
+        migrations.CreateModel(
             name='TokenValidation',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
