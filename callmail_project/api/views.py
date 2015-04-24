@@ -11,7 +11,7 @@ from rest_framework.parsers import MultiPartParser, FormParser, FileUploadParser
 from .serializers import (RegistrationSerializer, PhoneNumberValidationSerializer, MailSerializer,
                           MailForwardSerializer, UserProfileSerializer, CountrySerializer, ForgotPasswordSerializer,
                           MailForwardSerializerDestroy, ChangePasswordSerializer,AdvertismentBannerSerializer)
-from mail.utils import send_sms, generate_random_number, create_random_password,
+from mail.utils import send_sms, generate_random_number, create_random_password
 from .models import TokenValidation, Country
 from mail.models import Mail, MailForward, ForgotPasswordToken
 from advertisement.models import UserProfile
