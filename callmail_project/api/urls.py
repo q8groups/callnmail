@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls import patterns, include, url
 
-from .views import (RegistrationView, PhoneNumberValidateView, MailView, LoginView, MailForwardView,UserProfileCreateView,CountryCreateView, ForgetPassword, ResetPassword, DeleteEmailLink,ChangePassword,AdvertismentBanner)
+from .views import RegistrationView, PhoneNumberValidateView, MailView, LoginView, MailForwardView, UserProfileCreateView, CountryCreateView, ForgetPassword, ResetPassword, DeleteEmailLink, ChangePassword, AdvertismentBanner
 
 urlpatterns = patterns('',
                        url(r'^docs/', include('rest_framework_swagger.urls')),
