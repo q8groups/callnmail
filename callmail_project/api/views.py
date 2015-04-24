@@ -14,7 +14,7 @@ from .serializers import (RegistrationSerializer, PhoneNumberValidationSerialize
 from mail.utils import send_sms, generate_random_number, create_random_password
 from .models import TokenValidation, Country
 from mail.models import Mail, MailForward, ForgotPasswordToken
-from advertisement.models import UserProfile
+from advertisement.models import UserProfile,Banner
 
 
 User = get_user_model()
@@ -133,6 +133,9 @@ class PhoneNumberValidateView(generics.CreateAPIView):
 class AdvertismentBanner(generics.ListAPIView):
     serializer_class = AdvertismentBannerSerializer
     paginate_by = 1000
+
+    def get_queryset(self):
+        return Banner.objects.all().order_by('-priority')
 
 
 
