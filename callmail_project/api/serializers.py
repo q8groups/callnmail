@@ -62,7 +62,7 @@ class AdvertismentBannerSerializer(serializers.ModelSerializer):
     image = serializers.Field(source='image.url')
     class Meta:
         model = Banner
-        fields = ('image',)
+        fields = ('image','link',)
 
 
 
