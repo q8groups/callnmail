@@ -5,7 +5,7 @@ from rest_framework.authtoken.models import Token
 
 from mail.models import Mail, MailAttachment, MailForward
 
-from advertisement.models import UserProfile
+from advertisement.models import UserProfile,Banner
 
 from .models import Country
 
@@ -56,6 +56,13 @@ class MailForwardSerializerDestroy(serializers.ModelSerializer):
     class Meta:
         model = MailForward
         fields = ('email',)
+
+
+class AdvertismentBannerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Banner
+        fields = ('image',)
+
 
 
 class UserLinkedMailSerializer(serializers.ModelSerializer):

@@ -10,8 +10,8 @@ from rest_framework.parsers import MultiPartParser, FormParser, FileUploadParser
 
 from .serializers import (RegistrationSerializer, PhoneNumberValidationSerializer, MailSerializer,
                           MailForwardSerializer, UserProfileSerializer, CountrySerializer, ForgotPasswordSerializer,
-                          MailForwardSerializerDestroy, ChangePasswordSerializer)
-from mail.utils import send_sms, generate_random_number, create_random_password
+                          MailForwardSerializerDestroy, ChangePasswordSerializer,AdvertismentBannerSerializer)
+from mail.utils import send_sms, generate_random_number, create_random_password,
 from .models import TokenValidation, Country
 from mail.models import Mail, MailForward, ForgotPasswordToken
 from advertisement.models import UserProfile
@@ -127,6 +127,13 @@ class PhoneNumberValidateView(generics.CreateAPIView):
                 return Response({'non_field_errors': 'Invalid Token'})
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+
+class AdvertismentBanner(generics.ListAPIView):
+    serializer_class = AdvertismentBannerSerializer
+    paginate_by = 1000
+
 
 
 class MailView(generics.ListAPIView):
