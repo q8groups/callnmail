@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls import patterns, include, url
 
-from .views import (RegistrationView, PhoneNumberValidateView, MailView, LoginView, MailForwardView,
-                    UserProfileCreateView, CountryCreateView, ForgetPassword, ResetPassword, DeleteEmailLink,
-                    ChangePassword,AdvertismentBanner)
+from .views import (RegistrationView, PhoneNumberValidateView, MailView, LoginView, MailForwardView,UserProfileCreateView,CountryCreateView, ForgetPassword, ResetPassword, DeleteEmailLink,ChangePassword,AdvertismentBanner)
 
 urlpatterns = patterns('',
                        url(r'^docs/', include('rest_framework_swagger.urls')),
@@ -18,7 +16,7 @@ urlpatterns = patterns('',
                        url(r'^forgot-password/$', ForgetPassword.as_view(), name='forgot_password'),
                        url(r'^forgot-password/(?P<secret_token>.+)/$', ResetPassword.as_view(), name='reset_password'),
                        url(r'^change-password/$', ChangePassword.as_view(), name='change_password'),
-                        url(r'^ads/$', AdvertismentBanner.as_view(), name='banner'),
+                       url(r'^ads/$', AdvertismentBanner.as_view(), name='banner'),
 
 
 
