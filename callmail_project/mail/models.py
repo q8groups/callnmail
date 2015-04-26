@@ -118,6 +118,8 @@ def fetch_email(message):
                     from_email = message.from_address[0]
                     headers = {'Reply-To': message.from_address[0]}
                     msg = EmailMultiAlternatives(subject, text_content, from_email, forward_list,headers=headers)
+                    for attachfile in message.attachments.all():
+                        msg.attach(attachfile.get_filename(),attachfile.document.read(),attachfile.headers.split(';')[0].split(':')[1].strip())
                     msg.attach_alternative(html_content, "text/html")
                     msg.send()
         except User.DoesNotExist:
