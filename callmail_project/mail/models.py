@@ -40,6 +40,7 @@ class Mail(models.Model):
 class AccountActivation(models.Model):
     user = models.ForeignKey(User)
     activation_code = models.IntegerField()
+    is_done = models.BooleanField(default=False)
 
 
 class MailAttachment(models.Model):
@@ -56,6 +57,7 @@ class MailAttachment(models.Model):
 class ForgotPasswordToken(models.Model):
     user = models.ForeignKey(User)
     secret_token = models.IntegerField()
+    is_done = models.BooleanField(default=False)
 
 
 class MailForward(models.Model):

@@ -235,14 +235,10 @@ class ForgetPassword(generics.GenericAPIView):
         serializer = ForgotPasswordSerializer(data=request.DATA)
         if serializer.is_valid():
             username = request.DATA.get('username')
-            user = User.objects.get(username=username, is_active=True)
+            user = User.objects.get(username=username)
             random_number = generate_random_number()
-            try:
-                obj = ForgotPasswordToken.objects.get(user=user)
-                send_sms(user.username, 'Your activation code is ' + str(obj.secret_token))
-            except ForgotPasswordToken.DoesNotExist:
-                ForgotPasswordToken.objects.create(user=user, secret_token=random_number)
-                send_sms(user.username, 'Your activation code is ' + str(random_number))
+            ForgotPasswordToken.objects.create(user=user, secret_token=random_number)
+            send_sms(user.username, 'Your activation code is ' + str(random_number))
             return Response({"success": "Sms has been sent successfully"}, status=status.HTTP_200_OK)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -258,10 +254,12 @@ class ResetPassword(generics.GenericAPIView):
 
     def get(self, request, secret_token, format=None):
         try:
-            obj = ForgotPasswordToken.objects.get(secret_token=secret_token)
+            obj = ForgotPasswordToken.objects.get(secret_token=secret_token,is_done=False)
             password = request.GET.get("password", create_random_password())
             obj.user.set_password(password)
             obj.user.save()
+            obj.is_done=True
+            obj.save()
             send_sms(obj.user.username, 'Your new passsword is ' + password)
             obj.delete()
             token = Token.objects.get(user=obj.user)
