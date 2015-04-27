@@ -294,16 +294,21 @@ CELERY_IMPORTS = ('mail.tasks',)
 ######### END CELERY SETTINGS
 
 
+
+
 ###### TWILIO settings starts
 TWILIO_ACCOUNT_SID = 'AC78ee2647697092eb4d8f5c9c66eabee7'
 TWILIO_AUTH_TOKEN = 'f4510de0ac80935312cfc068c6fe7d5c'
 TWILIO_DEFAULT_CALLERID = '+14693012986'
 ###### TWILIO SETTTINGS END
 
+##### Login
 LOGIN_URL = '/login/'
-
 LOGIN_REDIRECT_URL = '/login/'
 
+
+### Auth Profile
+AUTH_PROFILE_MODULE = 'advertisement.UserProfile'
 MANDRILL_API_KEY = "CeQbYPB9BDvrSnvhCITBuA"
 EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend"
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
