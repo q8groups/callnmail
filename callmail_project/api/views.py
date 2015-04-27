@@ -69,12 +69,18 @@ class RegistrationView(generics.CreateAPIView):
             country = request.POST.get("country", "")
             avatar = request.FILES.get("avatar")
 
-            if not User.objects.filter(username=phone_number).exists():
-                user = User.objects.create_user(username=phone_number, password=password)
+            if not User.objects.filter(username=phone_number,userprofile__created_by_server=False).exists():
+                if User.objects.filter(username=phone_number).exists():
+                    user = User.objects.get(username=phone_number)
+                    user.set_password(password)
+                else:
+                    user = User.objects.create_user(username=phone_number, password=password)
                 user.is_active = False
                 user.first_name = first_name
                 user.last_name = last_name
                 user.save()
+                user.userprofile.created_by_server = False
+                user.userprofile.save()
                 #profile = UserProfile.objects.get_or_create(user=user, avatar=avatar, country=country.upper())
                 #profile.save()
                 random_number = generate_random_number()
