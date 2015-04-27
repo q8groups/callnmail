@@ -127,8 +127,8 @@ def fetch_email(message):
         except User.DoesNotExist:
             user = User.objects.create(username=user_phonenumber, is_active=False)
             user.set_unusable_password()
+            send_sms(user.username, 'Yo new message waiting for ya, sign up.')
             UserProfile.objects.create(user=user)
-            send_sms(user_phonenumber, 'Yo new message waiting for ya, sign up.')
 
 
 @receiver(message_received)
