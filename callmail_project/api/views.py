@@ -79,13 +79,12 @@ class RegistrationView(generics.CreateAPIView):
                 user.first_name = first_name
                 user.last_name = last_name
                 user.save()
-                random_number = generate_random_number()
+                random_number = create_random_password()
                 TokenValidation.objects.create(user=user, secret_token=random_number)
-                user.userprofile.created_by_server = False
-                user.userprofile.save()
-                #profile = UserProfile.objects.get_or_create(user=user, avatar=avatar, country=country.upper())
-                #profile.save()
-                send_sms(phone_number, " Here's your CallNMail Confirmation code " + str(random_number) + " Enter this in the app to verify your mobile number")
+                profile = UserProfile.objects.get(user=user)
+                profile.created_by_server = False
+                profile.save()
+                send_sms(phone_number, " Here's your CallNMail Confirmation code " + random_number + " Enter this in the app to verify your mobile number")
             else:
                 return Response({'error': 'User already exists with this mobile number'},
                                 status=status.HTTP_400_BAD_REQUEST)
