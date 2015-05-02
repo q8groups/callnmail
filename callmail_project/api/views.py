@@ -86,7 +86,7 @@ class RegistrationView(generics.CreateAPIView):
                 profile.save()
                 send_sms(phone_number, " Here's your CallNMail Confirmation code " + random_number + " Enter this in the app to verify your mobile number")
             else:
-                return Response({'error': 'User already exists with this mobile number'},
+                return Response({'error': 'User already exists with this mobile if you are a new user go to forget password'},
                                 status=status.HTTP_400_BAD_REQUEST)
 
             return Response({'success': 'SMS sent with activation code'}, status=status.HTTP_201_CREATED)
