@@ -244,6 +244,9 @@ class UserProfileCreateView(generics.CreateAPIView):
             age = request.DATA.get('age', '')
             country = request.DATA.get('country', '')
             avatar = request.FILES.get('avatar', '')
+            first_name = request.DATA.get('first_name','')
+            last_name = request.DATA.get('last_name','')
+
             if gender != '':
                 user_profile.gender = gender
             if age != '':
@@ -252,6 +255,12 @@ class UserProfileCreateView(generics.CreateAPIView):
                 user_profile.avatar = avatar
             if country != '':
                 user_profile.country = country
+            if first_name !='':
+                user_profile.user.first_name=first_name
+                user_profile.user.save()
+            if last_name !='':
+                user_profile.user.last_name=last_name
+                user_profile.user.save()
             user_profile.save()
             serializer = UserProfileSerializer(user_profile)
             return Response(serializer.data)
