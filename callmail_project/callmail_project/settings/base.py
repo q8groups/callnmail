@@ -211,6 +211,7 @@ LOCAL_APPS = (
     'mail',
     'advertisement',
     'api',
+    'aboutus',
 )
 
 THIRD_PARTY_APPS = (
