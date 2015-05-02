@@ -131,7 +131,6 @@ def fetch_email(message):
             user.userprofile.save()
             send_sms(user.username, 'Yo new message waiting for ya, sign up.')
 
-
 @receiver(message_received)
 def dance_jig(sender, message, **args):
     fetch_email(message)
