@@ -134,6 +134,48 @@ class PhoneNumberValidateView(generics.CreateAPIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+class PhoneNumberForgetPasswordValidateView(generics.CreateAPIView):
+    """
+    Validates the phone number with the activation code sent to the mobile of the user
+
+    POST - Returns the token if the secret token and phone number pair is valid
+    """
+    serializer_class = PhoneNumberValidationSerializer
+    parser_classes = (FormParser,)
+
+    def post(self, request, format=None):
+        serializer = PhoneNumberValidationSerializer(data=request.DATA)
+        if serializer.is_valid():
+            phone_number = request.POST.get('phone_number')
+            secret_token = request.POST.get('secret_token')
+            user = get_object_or_404(User, username=phone_number)
+            if ForgotPasswordToken.objects.filter(user=user, secret_token=secret_token).exists():
+                user.is_active = True
+                new_password = create_random_password()
+                user.set_password(new_password)
+                user.save()
+                send_sms(user.username,"Your new password is "+new_password)
+                Token.objects.filter(user=user).delete()
+                token,created = Token.objects.get_or_create(user=user)
+                mail_forwards = MailForward.objects.filter(user=user)
+                mail_forwards_list = []
+                for mail_forwards_object in mail_forwards:
+                    mail_forwards_list.append(MailForwardSerializer(mail_forwards_object).data)
+
+                try:
+                    user_profile = UserProfile.objects.get(user=user)
+                    serializer = UserProfileSerializer(user_profile)
+                    data = serializer.data
+                    data['token'] = token.key
+                    data['user']['mail_forwards'] = mail_forwards_list
+                except UserProfile.DoesNotExist:
+                    data = {'token': token.key}
+                return Response({'result': data})
+            else:
+                return Response({'non_field_errors': 'Invalid Token'})
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 class AdvertismentBanner(generics.ListAPIView):
     serializer_class = AdvertismentBannerSerializer
