@@ -91,7 +91,7 @@ class ForgotPasswordSerializer(serializers.Serializer):
 
     def validate_username(self, attrs, username):
         username = attrs[username]
-        if not User.objects.filter(username=username, is_active=True).exists():
+        if not User.objects.filter(username=username).exists():
             raise serializers.ValidationError("User with that username doesn't exists or is inactive.")
         return attrs
 
