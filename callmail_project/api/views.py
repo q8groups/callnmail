@@ -108,7 +108,10 @@ class PhoneNumberValidateView(generics.CreateAPIView):
         if serializer.is_valid():
             phone_number = request.POST.get('phone_number')
             secret_token = request.POST.get('secret_token')
+            import pdb
+            pdb.set_trace()
             user = get_object_or_404(User, username=phone_number)
+            pdb.set_trace()
             if TokenValidation.objects.filter(user=user, secret_token=secret_token).exists():
                 user.is_active = True
                 user.save()
