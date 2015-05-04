@@ -13,7 +13,7 @@ from .serializers import (RegistrationSerializer, PhoneNumberValidationSerialize
                           MailForwardSerializerDestroy, ChangePasswordSerializer,AdvertismentBannerSerializer)
 from mail.utils import send_sms, generate_random_number, create_random_password
 from .models import TokenValidation, Country
-from mail.models import Mail, MailForward, ForgotPasswordToken
+from mail.models import Mail, MailForward
 from advertisement.models import UserProfile,Banner
 
 
@@ -108,10 +108,7 @@ class PhoneNumberValidateView(generics.CreateAPIView):
         if serializer.is_valid():
             phone_number = request.POST.get('phone_number')
             secret_token = request.POST.get('secret_token')
-            import pdb
-            pdb.set_trace()
             user = get_object_or_404(User, username=phone_number)
-            pdb.set_trace()
             if TokenValidation.objects.filter(user=user, secret_token=secret_token).exists():
                 user.is_active = True
                 user.save()
@@ -152,7 +149,7 @@ class PhoneNumberForgetPasswordValidateView(generics.CreateAPIView):
             phone_number = request.POST.get('phone_number')
             secret_token = request.POST.get('secret_token')
             user = get_object_or_404(User, username=phone_number)
-            if ForgotPasswordToken.objects.filter(user=user, secret_token=secret_token).exists():
+            if TokenValidation.objects.filter(user=user, secret_token=secret_token).exists():
                 user.is_active = True
                 new_password = create_random_password()
                 user.set_password(new_password)
@@ -296,7 +293,7 @@ class ForgetPassword(generics.GenericAPIView):
             username = request.DATA.get('username')
             user = User.objects.get(username=username)
             random_number = generate_random_number()
-            ForgotPasswordToken.objects.create(user=user, secret_token=random_number)
+            TokenValidation.objects.create(user=user, secret_token=random_number)
             send_sms(user.username, 'Your activation code is ' + str(random_number))
             return Response({"success": "Sms has been sent successfully"}, status=status.HTTP_200_OK)
         else:
@@ -313,7 +310,7 @@ class ResetPassword(generics.GenericAPIView):
 
     def get(self, request, secret_token, format=None):
         try:
-            obj = ForgotPasswordToken.objects.get(secret_token=secret_token,is_done=False)
+            obj = TokenValidation.objects.get(secret_token=secret_token,is_done=False)
             password = request.GET.get("password", create_random_password())
             obj.user.set_password(password)
             obj.user.save()
@@ -323,7 +320,7 @@ class ResetPassword(generics.GenericAPIView):
             obj.delete()
             token = Token.objects.get(user=obj.user)
             return Response({'token': token.key}, status=status.HTTP_200_OK)
-        except (ForgotPasswordToken.DoesNotExist, ValueError):
+        except (TokenValidation.DoesNotExist, ValueError):
             return Response("SMS NOT SENT", status=status.HTTP_200_OK)
 
 
