@@ -7,7 +7,8 @@ from django.core.mail import EmailMultiAlternatives
 from advertisement.models import UserProfile, Advertisement
 from django.contrib.auth.models import User
 
-from . import models,utils
+from .models import MailForward
+from .utils import send_sms,find_age_group
 
 @task
 def email_cron():
@@ -28,7 +29,7 @@ def fetch_email(message):
                 user_profile = UserProfile.objects.get(user=user)
                 age = user_profile.age
                 if age:
-                    age_group = utils.find_age_group(age)
+                    age_group = find_age_group(age)
                     advertisement = Advertisement.objects.filter(age_group=age_group)
                     if advertisement.exists():
                         advertisement = advertisement[0].body
@@ -43,7 +44,7 @@ def fetch_email(message):
 
                 text_content = message.text + advertisement
                 html_content = message.html + advertisement
-                forward_email = models.MailForward.objects.filter(user=user)
+                forward_email = MailForward.objects.filter(user=user)
                 flag = forward_email.exists()
                 if flag:
                     forward_email = forward_email.values_list('email')
@@ -65,7 +66,7 @@ def fetch_email(message):
             user.set_unusable_password()
             user.userprofile.created_by_server=True
             user.userprofile.save()
-            utils.send_sms(user.username, 'Yo new message waiting for ya, sign up.')
+            send_sms(user.username, 'Yo new message waiting for ya, sign up.')
 
 
 
