@@ -1,22 +1,30 @@
 '''
 Various utils for the mail application
 '''
-
 import random
-
-from django.conf import settings
+import magic
 from datetime import datetime
 
-import magic
+from django.conf import settings
+from django.contrib.auth.models import User
+from django.dispatch import receiver
+from django.core.mail import EmailMultiAlternatives
+
+from django_mailbox.signals import message_received
+
 
 from twilio.rest import TwilioRestClient
 from twilio import TwilioRestException
 
-from django.core.mail import EmailMultiAlternatives
 from advertisement.models import UserProfile, Advertisement
-from django.contrib.auth.models import User
+
 
 from .models import MailForward
+
+
+@receiver(message_received)
+def dance_jig(sender, message, **args):
+    fetch_email(message)
 
 
 def send_sms(user, message):
