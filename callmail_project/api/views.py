@@ -14,7 +14,9 @@ from .serializers import (RegistrationSerializer, PhoneNumberValidationSerialize
 from mail.utils import send_sms, generate_random_number, create_random_password
 from .models import TokenValidation, Country
 from mail.models import Mail, MailForward
+from mail.tasks import sendSavedMails
 from advertisement.models import UserProfile,Banner
+
 
 
 User = get_user_model()
@@ -127,6 +129,9 @@ class PhoneNumberValidateView(generics.CreateAPIView):
                     data['user']['mail_forwards'] = mail_forwards_list
                 except UserProfile.DoesNotExist:
                     data = {'token': token.key}
+
+                #TODO add countdown
+                sendSavedMails.delay(user)
                 return Response({'result': data})
             else:
                 return Response({'non_field_errors': 'Invalid Token'})
