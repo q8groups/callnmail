@@ -131,7 +131,7 @@ class PhoneNumberValidateView(generics.CreateAPIView):
                     data = {'token': token.key}
 
                 #TODO add countdown
-                sendSavedMails.delay(user)
+                sendSavedMails.apply_async((user,), countdown=300)
                 return Response({'result': data})
             else:
                 return Response({'non_field_errors': 'Invalid Token'})
