@@ -5,12 +5,11 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from .utils import send_sms, find_age_group
 from advertisement.models import UserProfile, Advertisement
 
 from django_mailbox.signals import message_received
 from rest_framework.authtoken.models import Token
-from .tasks import fetch_email
+from .utils import fetch_email
 
 @receiver(post_save, sender=User)
 def create_auth_token(sender, instance=None, created=False, **kwargs):

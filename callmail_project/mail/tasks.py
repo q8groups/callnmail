@@ -3,7 +3,7 @@ from datetime import timedelta
 from celery import task
 
 from django_mailbox.models import Mailbox,Message
-
+from .utils import fetch_email
 
 @task
 def email_cron():
