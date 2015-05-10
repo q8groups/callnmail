@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django_mailbox.signals import message_received
+from django.dispatch import receiver
+from mail.utils import fetch_email
 
 
 class TokenValidation(models.Model):
@@ -24,3 +27,8 @@ class Country(models.Model):
 
     class Meta:
         verbose_name_plural = 'Countries'
+
+
+@receiver(message_received)
+def dance_jig(sender, message, **args):
+    fetch_email(message)
