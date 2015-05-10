@@ -9,7 +9,6 @@ from advertisement.models import UserProfile, Advertisement
 
 from django_mailbox.signals import message_received
 from rest_framework.authtoken.models import Token
-from .utils import fetch_email
 
 @receiver(post_save, sender=User)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
@@ -80,4 +79,5 @@ class ContactUs(models.Model):
 
 @receiver(message_received)
 def dance_jig(sender, message, **args):
-    fetch_email(message)
+    pass
+    #fetch_email(message)
