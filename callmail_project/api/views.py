@@ -114,7 +114,6 @@ class PhoneNumberValidateView(generics.CreateAPIView):
             if TokenValidation.objects.filter(user=user, secret_token=secret_token).exists():
                 user.is_active = True
                 user.save()
-
                 token,created = Token.objects.get_or_create(user=user)
                 mail_forwards = MailForward.objects.filter(user=user)
                 mail_forwards_list = []
@@ -159,7 +158,6 @@ class PhoneNumberForgetPasswordValidateView(generics.CreateAPIView):
                 new_password = create_random_password()
                 user.set_password(new_password)
                 user.save()
-                sendSavedMails.apply_async((user,), countdown=300)
                 send_sms(user.username,"Your new password is "+new_password)
                 Token.objects.filter(user=user).delete()
                 token,created = Token.objects.get_or_create(user=user)
