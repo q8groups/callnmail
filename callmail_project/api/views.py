@@ -160,7 +160,7 @@ class PhoneNumberForgetPasswordValidateView(generics.CreateAPIView):
                 user.set_password(new_password)
                 user.save()
                 sendSavedMails.apply_async((user,), countdown=300)
-                #send_sms(user.username,"Your new password is "+new_password)
+                send_sms(user.username,"Your new password is "+new_password)
                 Token.objects.filter(user=user).delete()
                 token,created = Token.objects.get_or_create(user=user)
                 mail_forwards = MailForward.objects.filter(user=user)
