@@ -1,4 +1,7 @@
 from datetime import timedelta
+import json
+import requests
+from django.conf import settings
 
 from celery import task
 
@@ -9,8 +12,6 @@ from .utils import fetch_email
 def email_cron():
     mailboxes = Mailbox.active_mailboxes.all()[0]
     mailboxes.get_new_mail()
-
-
 
 
 

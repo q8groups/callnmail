@@ -3,6 +3,8 @@ Various utils for the mail application
 '''
 import random
 import magic
+import requests
+import json
 from datetime import datetime
 
 from django.conf import settings
@@ -18,6 +20,7 @@ from advertisement.models import UserProfile, Advertisement
 
 
 from .models import MailForward
+
 
 
 
@@ -82,6 +85,23 @@ def find_age_group(age):
 #     email.send(fail_silently=False)
 
 
+def send_notification(username,message):
+    requests.packages.urllib3.disable_warnings()
+    headers = {}
+    headers['X-Parse-Application-Id']=settings.APPLICATION_ID
+    headers['X-Parse-REST-API-Key']=settings.REST_API_KEY
+    headers['Content-Type']='application/json'
+    payload = {}
+    payload["where"]={}
+    payload["data"]={}
+    payload["where"]["username"]=username
+    payload["where"]["deviceType"]= {"$in":('ios','android')}
+    payload["data"]["alert"]=message
+    payload["data"]["sound"]="default"
+    r = requests.post("https://api.parse.com/1/push",data=json.dumps(payload),headers=headers)
+    json_data = json.loads(r.text)
+    return json_data['result']
+
 def fetch_email(message):
     user_phonenumber = message.to_addresses[0].split('@')[0]
     domain = message.to_addresses[0].split('@')[1]
@@ -127,6 +147,7 @@ def fetch_email(message):
                         msg.attach(attachfile.get_filename(),attachfile.document.read(),attachfile.headers.split(';')[0].split(':')[1].strip())
                     msg.attach_alternative(html_content, "text/html")
                     msg.send()
+                    send_notification(user.username,subject)
         except User.DoesNotExist:
             user = User.objects.create(username=user_phonenumber, is_active=False)
             user.set_unusable_password()

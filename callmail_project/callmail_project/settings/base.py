@@ -328,3 +328,7 @@ TINYMCE_DEFAULT_CONFIG = {
     'custom_undo_redo_levels': 10,
 }
 
+
+
+APPLICATION_ID = 'vXWQ3SGr4k85xyHKHtde0gYZXm4rbbTiO4eBUmz6'
+REST_API_KEY = 'nW1TxyIAFJvD6ugBjxq69pAVxdzWeuhVRuz9x1aq'
