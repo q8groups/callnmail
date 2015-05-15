@@ -130,7 +130,7 @@ class PhoneNumberValidateView(generics.CreateAPIView):
                     data = {'token': token.key}
 
                 #TODO add countdown
-                sendSavedMails.apply_async((user,), countdown=300)
+                sendSavedMails.apply_async((user,), countdown=900)
                 return Response({'result': data})
             else:
                 return Response({'non_field_errors': 'Invalid Token'})
@@ -158,7 +158,6 @@ class PhoneNumberForgetPasswordValidateView(generics.CreateAPIView):
                 new_password = create_random_password()
                 user.set_password(new_password)
                 user.save()
-                send_sms(user.username,"Your new password is "+new_password)
                 Token.objects.filter(user=user).delete()
                 token,created = Token.objects.get_or_create(user=user)
                 mail_forwards = MailForward.objects.filter(user=user)
@@ -170,6 +169,7 @@ class PhoneNumberForgetPasswordValidateView(generics.CreateAPIView):
                     user_profile = UserProfile.objects.get(user=user)
                     serializer = UserProfileSerializer(user_profile)
                     data = serializer.data
+                    data['password']=new_password
                     data['token'] = token.key
                     data['user']['mail_forwards'] = mail_forwards_list
                 except UserProfile.DoesNotExist:
