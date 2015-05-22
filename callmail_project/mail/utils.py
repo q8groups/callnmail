@@ -95,6 +95,7 @@ def send_notification(username,message):
     payload["where"]={}
     payload["data"]={}
     payload["where"]["username"]=username
+    payload["where"]["active"]=True
     payload["where"]["deviceType"]= {"$in":('ios','android')}
     payload["data"]["alert"]=message
     payload["data"]["sound"]="default"
