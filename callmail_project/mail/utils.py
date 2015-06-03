@@ -126,11 +126,18 @@ def fetch_email(message):
 
                 else:
                     advertisement = Advertisement.objects.get(default=True)
-                    #uadvertisement = '<img src="'+advertisement.photo.url+'"/>'
-                    advertisement = advertisement.body
+                    try:
+                        advertisementtext = advertisement.body + "<img src="+advertisement.photo.url +"/>"
+                    except:
+                        advertisementtext = advertisement.body
 
-                text_content = message.text + advertisement
-                html_content = message.html + advertisement
+
+
+
+
+
+                text_content = message.text + advertisementtext
+                html_content = message.html + advertisementtext
                 forward_email = MailForward.objects.filter(user=user)
                 flag = forward_email.exists()
                 if flag:
