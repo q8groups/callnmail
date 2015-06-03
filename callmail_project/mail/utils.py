@@ -122,12 +122,15 @@ def fetch_email(message):
                         advertisement = advertisement[0].body
                     else:
                         advertisement = Advertisement.objects.get(default=True)
-                        advertisement = advertisement.body
+                        try:
+                            advertisementtext = advertisement.body + "<img src='"+advertisement.photo.url +"'/>"
+                        except:
+                            advertisementtext = advertisement.body
 
                 else:
                     advertisement = Advertisement.objects.get(default=True)
                     try:
-                        advertisementtext = advertisement.photo.url
+                        advertisementtext = advertisement.body + "<img src='"+advertisement.photo.url +"'/>"
                     except:
                         advertisementtext = advertisement.body
 
