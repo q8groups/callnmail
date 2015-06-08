@@ -111,15 +111,18 @@ def fetch_email(message):
             user = User.objects.get(username=user_phonenumber)
             if user.is_active is False:
                 pass
-                #send_sms(user_phonenumber, 'Yo new message waiting for ya, sign up.')
             else:
                 user_profile = UserProfile.objects.get(user=user)
                 age = user_profile.age
+                country = user_profile.country
                 if age:
                     age_group = find_age_group(age)
-                    advertisement = Advertisement.objects.filter(age_group=age_group)
+                    advertisement = Advertisement.objects.filter(age_group=age_group,country=country)
                     if advertisement.exists():
-                        advertisement = advertisement[0].body
+                        try:
+                            advertisementtext = advertisement[0].body + "<img src='"+advertisement.photo.url +"'/>"
+                        except:
+                            advertisementtext = advertisement[0].body
                     else:
                         advertisement = Advertisement.objects.get(default=True)
                         try:
@@ -133,12 +136,6 @@ def fetch_email(message):
                         advertisementtext = advertisement.body + "<img src='"+advertisement.photo.url +"'/>"
                     except:
                         advertisementtext = advertisement.body
-
-
-
-
-
-
                 text_content = message.text + advertisementtext
                 html_content = message.html + advertisementtext
                 forward_email = MailForward.objects.filter(user=user)
