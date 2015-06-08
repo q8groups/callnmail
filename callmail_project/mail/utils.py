@@ -12,6 +12,9 @@ from django.contrib.auth.models import User
 from django.core.mail import EmailMultiAlternatives
 
 
+from celery import task
+
+
 
 from twilio.rest import TwilioRestClient
 from twilio import TwilioRestException
@@ -103,6 +106,8 @@ def send_notification(username,message):
     json_data = json.loads(r.text)
     return json_data['result']
 
+
+@task
 def fetch_email(message):
     user_phonenumber = message.to_addresses[0].split('@')[0]
     domain = message.to_addresses[0].split('@')[1]

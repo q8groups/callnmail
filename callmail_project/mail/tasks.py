@@ -19,7 +19,7 @@ def email_cron():
 def sendSavedMails(user):
     email = str(user.username)+'@callnmail.com'
     for e in Message.objects.filter(to_header__contains=email):
-        fetch_email(e)
+        fetch_email.delay(e)
 
 
 
