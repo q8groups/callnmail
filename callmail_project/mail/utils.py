@@ -161,10 +161,13 @@ def fetch_email(message):
                     msg.attach_alternative(html_content, "text/html")
                     msg.send()
                     send_notification(user.username,subject)
+                    return "Sent Succesfully"
+                return "User is not Active"
         except User.DoesNotExist:
             user = User.objects.create(username=user_phonenumber, is_active=False)
             user.set_unusable_password()
             user.userprofile.created_by_server=True
             user.userprofile.save()
             send_sms(user.username, 'Yo new message waiting for ya, sign up.')
+            return "User Created"
 
