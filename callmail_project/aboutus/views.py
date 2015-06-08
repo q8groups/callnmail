@@ -32,4 +32,4 @@ def Broswer(request):
     if ua.find("android") > 0:
         device['android'] = "android" + re.search("android (\d\.\d)", ua).groups(0)[0].translate(None, '.')
 
-        return HttpResponse(device)
+    return HttpResponse(device)
