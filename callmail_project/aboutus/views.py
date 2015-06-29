@@ -18,6 +18,20 @@ def Terms(request):
     obj = StaticContents.objects.get(pk=3)
     return HttpResponse(obj.body)
 
+def Aboutusandroid(request):
+    obj = StaticContents.objects.get(pk=4)
+    return HttpResponse(obj.body)
+
+
+def Privacyandroid(request):
+    obj = StaticContents.objects.get(pk=5)
+    return HttpResponse(obj.body)
+
+def Termsandroid(request):
+    obj = StaticContents.objects.get(pk=6)
+    return HttpResponse(obj.body)
+
+
 def Broswer(request):
     device = {}
 
