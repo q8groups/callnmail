@@ -19,7 +19,7 @@ def Terms(request):
     return HttpResponse(obj.body)
 
 def Aboutusandroid(request):
-    obj = StaticContents.objects.get(pk=4)
+    obj = StaticContents.objects.get(pk=6)
     return HttpResponse(obj.body)
 
 
@@ -28,7 +28,7 @@ def Privacyandroid(request):
     return HttpResponse(obj.body)
 
 def Termsandroid(request):
-    obj = StaticContents.objects.get(pk=6)
+    obj = StaticContents.objects.get(pk=4)
     return HttpResponse(obj.body)
 
 
