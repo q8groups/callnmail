@@ -2,7 +2,7 @@
 Various utils for the mail application
 '''
 import random
-import magic
+#import magic
 import requests
 import json
 from datetime import datetime

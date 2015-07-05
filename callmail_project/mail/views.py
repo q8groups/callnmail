@@ -17,6 +17,7 @@ from .forms import RegistrationForm, LoginForm, PasswordResetRequestForm, Passwo
 from .utils import send_sms, determine_mime_type, generate_random_number
 from .models import Mail, MailAttachment, ForgotPasswordToken, MailForward, AccountActivation
 from advertisement.models import UserProfile
+from api.models import Country
 
 
 class HomePage(generic.View):
@@ -37,9 +38,9 @@ class RegistrationView(generic.View):
     def post(self, request):
         rform = RegistrationForm(request.POST, request.FILES or None)
         if rform.is_valid():
-            country_codes = request.POST.get('country_codes')
+            country_codes = request.POST.get('country_code')
             phone_number = request.POST.get('phone_number')
-            phone_number = country_codes + phone_number
+            phone_number = "+" + country_codes + phone_number
             if User.objects.filter(username=phone_number, is_active=True).exists():
                 return render(request, 'registration.html', {'form': LoginForm(), 'rform': rform,
                                                     'number_error': 'User with that phone number already exists.'})
@@ -48,9 +49,6 @@ class RegistrationView(generic.View):
             first_name = request.POST.get('first_name')
             last_name = request.POST.get('last_name')
             avatar = request.FILES.get('avatar')
-            # gender = request.POST.get('gender')
-            # age_group = request.POST.get('age_group')
-            # country = request.POST.get('country')
             activation_code = generate_random_number()
             message = 'User created for %s. Your activation code is %s' % (phone_number, str(activation_code))
 
@@ -65,9 +63,6 @@ class RegistrationView(generic.View):
                 send_sms(phone_number, message)
                 profile = UserProfile.objects.get(user=user)
                 profile.avatar = avatar
-                # profile.gender = gender
-                # profile.age_group = age_group
-                # profile.country = country
                 profile.save()
 
             except User.DoesNotExist:
@@ -98,16 +93,14 @@ class LoginView(generic.View):
         if request.user.is_authenticated():
             return HttpResponseRedirect(reverse('mail:mailforward_list'))
         form = LoginForm()
-        #from django.core.mail import EmailMessage
-        #email = EmailMessage('Hello', 'This is the bodysss', 'hell@localhost', ['admin@localhost'])
-        #email.attach_file('/home/sachitad/hi.py')
-        #email.send(fail_silently=False)
         return render(request, 'login.html', {'form': form, 'rform': RegistrationForm()})
 
     def post(self, request):
         form = LoginForm(request.POST or None)
         if form.is_valid():
-            username = request.POST.get('phone_number')
+            country_codes = request.POST.get('country_code')
+            phone_number = request.POST.get('phone_number')
+            username = "+" + country_codes + phone_number
             password = request.POST.get('password')
             user = authenticate(username=username, password=password)
             if user is not None and user.is_active:
@@ -331,3 +324,14 @@ class ChangeAvatar(LoginRequiredMixin, generic.View):
             profile.save()
             messages.success(request, 'Profile Avatar successfully changed.')
         return HttpResponseRedirect(path)
+
+
+class TestTemplate(generic.TemplateView):
+    template_name = "test.html"
+    def get_context_data(self, **kwargs):
+        context = super(TestTemplate, self).get_context_data(**kwargs)
+        country = Country.objects.all().order_by('priority')
+        for c in country:
+            c.prefix_val = c.prefix[1:]
+        context['codes'] = country
+        return context

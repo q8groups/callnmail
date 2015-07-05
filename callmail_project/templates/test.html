@@ -1,145 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<title>Call N Email</title>
+{% load country_tags %}
 
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+{% block content %}
 
-	<!-- Fevicon -->
-	<link rel="icon" href="favicon.png" type="png" />
-	
-	<!-- bootstrap -->
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
-	
-	<!-- fonts -->
-	<link rel="stylesheet" type="text/css" href="css/font-awesome.css">
-	<link rel="stylesheet" type="text/css" href="css/fonts.css">
 
-	<!-- custom -->
-	<link rel="stylesheet" type="text/css" href="css/style.css">
-	<link rel="stylesheet" type="text/css" href="css/responsive.css">
 
-	<!-- js -->
-	<script type="text/javascript" src="js/jquery-1.11.2.js"></script>
-	<script type="text/javascript" src="js/bootstrap.js"></script>
-	<script type="text/javascript" src="js/wow.min.js"></script>
-	<script type="text/javascript" src="js/custom.js"></script>
+{% for object in codes %}
+																    <option class="country" value="{{ object.prefix_val }}" data-country-code="{{ object.code|lower }}">
+																	<div class="flag">
+																            <div class="iti-flag {{ object.code|lower }}"></div>
+																        </div>
+																        <span class="dial-code">{{ object.prefix }}</span>
+																        <span class="country-name">{{ object.name }}</span>
 
-	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-	<!--[if lt IE 9]>
-	 <script src="js/html5shiv.min.js"></script>
-	 <script src="js/respond.js"></script>
-	 <![endif]-->
+																	</option>
+                                                                        {% endfor %}
 
-	</head>
-
-	<body>
-
-		<header class="header_single">
-			<div class="container">
-				<div class="head">
-					<div class="logo"><a href="index.html"><img src="images/logo_bg.png" alt="logo"></a></div>
-					<div class="menu">
-						<ul>
-							<li><a href="about.html">About</a></li>
-							<li><a href="login.html">Login/Sign up</a></li>
-							<li><a href="contact.html">Contact</a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</header><!-- /header -->
-
-		<section id="main_content" class="sec_profile">
-			<div class="container">
-				<div class="box_container">
-					<form action="post">
-						<div class="row">
-							<div class="col-md-4 col-sm-5">
-								<div class="p_content">
-									<div class="profile_pics">
-										<img src="images/profile_img1.png" alt="profile_img">
-										<a class="change_pic" href="#">Change</a>
-									</div>
-									<span class="name">Mohammed AlJasim</span>
-								</div>
-							</div><!-- /p_content -->
-							<div class="col-md-8 col-sm-7">
-								<div class="change_pass">
-									<div class="sec_title"><h2>Change Password</h2></div>
-
-									<div class="p_content sec_half_left">
-										<div class="custom_input_row">
-											<input type="text" name="old_pass" id="old_pass" placeholder="Old Password" />
-										</div><!-- /custom_input_row -->
-										<div class="custom_input_row">
-											<input type="text" name="new_pass" id="new_pass" placeholder="New Password" />
-										</div><!-- /custom_input_row -->
-									</div><!-- /p_content -->
-
-									<div class="p_content sec_half_right">
-										<div class="edit_panel">
-											<a class="button" href="#">Change Password</a>
-										</div>
-									</div><!-- /p_content -->
-								</div><!-- /change_pass -->
-							</div>
-						</div>
-					</form>
-				</div>
-
-				<div class="row">
-					<div class="col-sm-12">
-						<div class="app_store">
-							<a href="#"><img src="images/icon_app_store.png" alt="app_store"></a>
-							<a href="#"><img src="images/icon_app_google_play.png" alt="google_play"></a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section><!-- /main_content -->
-
-		<footer class="main_footer">
-			<div class="container">
-				<div  class="footer">
-					<div class="footer_logo">
-						<a href="#"><img src="images/footer_logo.png" alt="footer_logo"></a>
-					</div><!-- /footer_logo -->
-
-					<div class="footer_social">
-						<ul>
-							<li><a href="#"><img src="images/social_icon_youtube.png" alt="social_icon"></a></li>
-							<li><a href="#"><img src="images/social_icon_facebook.png" alt="social_icon"></a></li>
-							<li><a href="#"><img src="images/social_icon_twitter.png" alt="social_icon"></a></li>
-						</ul>
-					</div><!-- /footer_social -->
-				</div>
-			</div>
-		</footer><!-- /footer -->
-
-		<section class="copyright">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6 col-sm-7">
-						<div class="footer_menu">
-							<ul>
-								<li><a href="about.html">About</a></li>
-								<li><a href="login.html">Login/Sign up</a></li>
-								<li><a href="#">FAQ</a></li>
-								<li><a href="#">Privacy Policy</a></li>
-								<li><a href="contact.html">Contact Us</a></li>
-							</ul>
-						</div><!-- /footer_menu -->
-					</div>
-					<div class="col-md-6 col-sm-5">
-						<div class="copyright_content">
-							<p>© 2014 Copyright CallnMail. All Rights Reserved.</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section><!-- /copyright -->
-
-	</body>
-	</html>
+{% endblock content %}

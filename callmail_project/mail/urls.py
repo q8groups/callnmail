@@ -2,11 +2,12 @@ from django.conf.urls import patterns, include, url
 
 from .views import HomePage, RegistrationView, LoginView, MailListView, MailDetailView, download_attachment, PasswordResetView, PasswordResetRequestView, MailForwardCreateView, MailForwardListView, \
     AboutView, ActivateUser, ContactView, FAQView, PrivacyView, ProfileView, PasswordChangeView, LogoutView, \
-    ChangeAvatar
+    ChangeAvatar,TestTemplate
 
 urlpatterns = patterns('',
     url(r'^$', HomePage.as_view(), name='index'),
     url(r'^about/$', AboutView.as_view(), name='about'),
+    url(r'^test/$', TestTemplate.as_view(), name='test-template'),
     url(r'^contact/$', ContactView.as_view(), name='contact'),
     url(r'^profile/$', ProfileView.as_view(), name='profile'),
     url(r'^faq/$', FAQView.as_view(), name='faq'),

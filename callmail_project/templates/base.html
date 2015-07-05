@@ -19,22 +19,32 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'css/fonts.css' %}">
 
 	<!-- custom -->
+
 	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}">
+{% block extra_css %}
+{% endblock extra_css %}
 
 	<!-- js -->
+
 	<script type="text/javascript" src="{% static 'js/jquery-1.11.2.js' %}"></script>
 	<script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
+{% block extra_js %}
+	{% endblock extra_js %}
 	<script type="text/javascript" src="{% static 'js/wow.min.js' %}"></script>
 	<script type="text/javascript" src="{% static 'js/custom.js' %}"></script>
 
+
+
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
-	 <script src="js/html5shiv.min.js"></script>
-	 <script src="js/respond.js"></script>
+	 <script src="{% static 'js/html5shiv.min.js' %}"></script>
+	 <script src="{% static  'js/respond.js' %}	"></script>
 	 <![endif]-->
 
 	</head>
+
+
 
 	<body>
 		<div class="wrap">
@@ -47,10 +57,10 @@
                     {% endblock %}
                 </div>
 			</header><!-- /header -->
-            {% bootstrap_javascript jquery=1 %}
-            {% if request.path != '/contact/' %}
-            {% bootstrap_messages FIXTHIS %}
-            {% endif %}
+{#            {% bootstrap_javascript jquery=1 %}#}
+{#            {% if request.path != '/contact/' %}#}
+{#            {% bootstrap_messages FIXTHIS %}#}
+{#            {% endif %}#}
             {% block content %}
 
             {% endblock %}
@@ -94,7 +104,7 @@
 					</div>
 					<div class="col-md-6 col-sm-5">
 						<div class="copyright_content">
-							<p>© 2014 Copyright CallnMail. All Rights Reserved.</p>
+							<p>© 2015 Copyright CallnMail. All Rights Reserved.</p>
 						</div>
 					</div>
 				</div>

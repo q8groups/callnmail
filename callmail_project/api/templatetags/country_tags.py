@@ -6,7 +6,9 @@ register = template.Library()
 
 
 def country_code_prefix():
-    prefix = Country.objects.all().order_by('priority').values_list('prefix')
-    return [''.join(i) for i in prefix]
+    country = Country.objects.all().order_by('priority')
+    for c in country:
+        c.prefix_val = c.prefix[1:]
+    return country
 
 register.assignment_tag(country_code_prefix)
