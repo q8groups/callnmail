@@ -72,7 +72,7 @@ DATABASES = {
 
 ########## GENERAL CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#time-zone
-TIME_ZONE = 'America/Los_Angeles'
+TIME_ZONE = 'UTC'
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#language-code
 LANGUAGE_CODE = 'en-us'
@@ -328,3 +328,8 @@ APPLICATION_ID = 'vXWQ3SGr4k85xyHKHtde0gYZXm4rbbTiO4eBUmz6'
 REST_API_KEY = 'nW1TxyIAFJvD6ugBjxq69pAVxdzWeuhVRuz9x1aq'
 
 MAIL_CLEAN_PERIOD = 7
+
+
+SMS_MSG_ACTIVATION = " Here's your Callnmail mobile confirmation code : {0} . Enter this in the app or website to verify your mobile number."
+SMS_MSG_PASSWORD = " Here's your Callnmail mobile confirmation code : {0} . Enter this in the app or website and choose your new password."
+SMS_NEW_USER = "You just received an email from via Callnmail . To view it download the app (link of app ) or visit www.callnmail.com ."
