@@ -196,12 +196,15 @@ class PasswordResetRequestView(generic.View):
         return render(request, 'password_reset_request_form.html', {'form': PasswordResetRequestForm()})
 
     def post(self, request):
+        country_codes = request.POST.get('country_codes','')
+        phone_number = request.POST.get('phone_number','')
+        phone_number = "+"+country_codes + phone_number
+        request.POST = request.POST.copy()
+        request.POST['phone_number']=phone_number
+
         form = PasswordResetRequestForm(request.POST)
         random_number = generate_random_number()
         if form.is_valid():
-            country_codes = request.POST.get('country_codes')
-            phone_number = request.POST.get('phone_number')
-            phone_number = country_codes + phone_number
             user_obj = get_object_or_404(User, username=phone_number)
 
             token_check = ForgotPasswordToken.objects.filter(user=user_obj)
@@ -223,11 +226,13 @@ class PasswordResetView(generic.View):
 
 
     def post(self, request):
+        country_codes = request.POST.get('country_codes','')
+        phone_number = request.POST.get('phone_number','')
+        phone_number = "+"+country_codes + phone_number
+        request.POST = request.POST.copy()
+        request.POST['phone_number']=phone_number
         form = PasswordResetForm(request.POST)
         if form.is_valid():
-            country_codes = request.POST.get('country_codes')
-            phone_number = request.POST.get('phone_number')
-            phone_number = country_codes+ phone_number
             password = request.POST.get('new_password1')
             user_obj = get_object_or_404(User, username=phone_number)
             user_obj.set_password(password)

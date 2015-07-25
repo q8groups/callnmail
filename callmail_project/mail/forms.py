@@ -51,7 +51,7 @@ class ActivateForm(forms.Form):
 
 
 class PasswordResetRequestForm(forms.Form):
-    phone_number = forms.IntegerField()
+    phone_number = forms.CharField()
 
     def clean(self):
         if not User.objects.filter(username=self.cleaned_data.get('phone_number')):

@@ -29,7 +29,7 @@ DATABASES = {
         'NAME': 'callnmail',
         'USER': 'callnmail',
         'PASSWORD': 'noKia6230',
-        'HOST': 'callnmail.ctgrepj1cb4h.eu-west-1.rds.amazonaws.com',
+        'HOST': '127.0.0.1',
         'PORT': '',
     }
 }
