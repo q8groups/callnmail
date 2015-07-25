@@ -281,7 +281,7 @@ TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 ##########  CELERY SETTINGS START
 import djcelery
 djcelery.setup_loader()
-BROKER_URL = 'redis://127.0.0.1:6379/0'
+BROKER_URL = 'redis://callnmailsm.wxx3ba.0001.euw1.cache.amazonaws.com:6379/0'
 
 CELERY_RESULT_BACKEND = 'redis'
 CELERY_REDIS_HOST = '127.0.0.1'
