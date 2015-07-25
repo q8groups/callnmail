@@ -96,13 +96,18 @@ class LoginView(generic.View):
         return render(request, 'login.html', {'form': form, 'rform': RegistrationForm()})
 
     def post(self, request):
+        country_codes = request.POST.get('country_codes','')
+        phone_number = request.POST.get('phone_number','')
+        phone_number = "+"+country_codes + phone_number
+        request.POST = request.POST.copy()
+        request.POST['phone_number']=phone_number
         form = LoginForm(request.POST or None)
         if form.is_valid():
-            country_codes = request.POST.get('country_code')
-            phone_number = request.POST.get('phone_number')
-            username = "+" + country_codes + phone_number
+            username = phone_number
+            print username
             password = request.POST.get('password')
             user = authenticate(username=username, password=password)
+            print user
             if user is not None and user.is_active:
                 login(request, user)
                 return HttpResponseRedirect('/')
