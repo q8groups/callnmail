@@ -420,6 +420,17 @@ select:-webkit-autofill {
     margin: 0 0 30px;
 }
 
+.text-warning {
+position: absolute;
+top: 66px;
+}
+
+.custom_input_row .errorlist{
+position: absolute;
+top: 66px;
+}
+
+
 .content h3{
     font-family: 'AvenirLT-Medium';
     font-size: 18px;
@@ -484,6 +495,14 @@ select:-webkit-autofill {
 .contact_form{
     position: relative;
     margin: 0 0 30px;
+}
+
+.contact_form .form-group > input {
+margin-bottom: 5px;
+}
+
+p_content .edit_panel {
+text-align: center;
 }
 .cf_btn_group{
     text-align: right;
@@ -643,7 +662,7 @@ select:-webkit-autofill {
 .custom_input_row{
     border: 1px solid #942d9d;
     border-radius: 25px;
-    height: 50px;
+position: relative;
     width: 100%;
     display: inline-block;
     margin-bottom: 15px;
@@ -663,7 +682,7 @@ select:-webkit-autofill {
     line-height: 1;
 }
 .box_container label{
-    padding-top: 2px;
+    padding-bottom: 2px;
 
 }
 .box_container input{
