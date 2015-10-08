@@ -195,17 +195,16 @@ class MailDetailView(LoginRequiredMixin, generic.DetailView):
     model = Mail
 
 
-
 class PasswordResetRequestView(generic.View):
     def get(self, request):
         return render(request, 'password_reset_request_form.html', {'form': PasswordResetRequestForm()})
 
     def post(self, request):
-        country_codes = request.POST.get('country_codes','')
-        phone_number = request.POST.get('phone_number','')
+        country_codes = request.POST.get('country_codes', '')
+        phone_number = request.POST.get('phone_number', '')
         phone_number = "+"+country_codes + phone_number
         request.POST = request.POST.copy()
-        request.POST['phone_number']=phone_number
+        request.POST['phone_number'] = phone_number
 
         form = PasswordResetRequestForm(request.POST)
         random_number = generate_random_number()
@@ -218,25 +217,56 @@ class PasswordResetRequestView(generic.View):
                 token_check.delete()
 
             ForgotPasswordToken.objects.create(user=user_obj, secret_token=random_number)
-            send_sms(phone_number, message='Your token is %s' %(random_number))
-            return HttpResponseRedirect(reverse('mail:reset_password'))
+            send_sms(phone_number, message='Your token is %s' % (random_number))
+            return HttpResponseRedirect(reverse('mail:validate_token'))
 
         else:
             return render(request, 'password_reset_request_form.html', {'form': form})
+
+
+class PasswordResetValidateToken(generic.View):
+    def get(self, request):
+        form = ActivateForm()
+        return render(request, 'activate_account.html', {'form': form})
+
+    def post(self, request):
+        form = ActivateForm(request.POST or None)
+        if form.is_valid():
+            country_codes = request.POST.get('country_codes')
+            phone_number = request.POST.get('phone_number')
+            username = '+' + country_codes + phone_number
+            activation_code = request.POST.get('activation_code')
+            activation = ForgotPasswordToken.objects.filter(user__username=username, secret_token=activation_code)
+            if activation.exists():
+                instance = get_object_or_404(ForgotPasswordToken, user__username=username, secret_token=activation_code)
+                instance.is_done = True
+                instance.save()
+                return HttpResponseRedirect(reverse('mail:reset_password'))
+            else:
+                return render(request, 'activate_account.html', {'form': form, 'error': 'Invalid Activation Code.'})
+
+        else:
+            return render(request, 'activate_account.html', {'form': form})
 
 
 class PasswordResetView(generic.View):
     def get(self, request):
         return render(request, 'password_reset_form.html', {'form': PasswordResetForm()})
 
-
     def post(self, request):
         country_codes = request.POST.get('country_codes','')
         phone_number = request.POST.get('phone_number','')
-        phone_number = "+"+country_codes + phone_number
+        phone_number = "+" + country_codes + phone_number
         request.POST = request.POST.copy()
-        request.POST['phone_number']=phone_number
+        request.POST['phone_number'] = phone_number
         form = PasswordResetForm(request.POST)
+
+        #Check if user activated the code or not
+        if not ForgotPasswordToken.objects.filter(user__username=phone_number, is_done=True):
+            return render(request, 'password_reset_form.html', {'form': form, 'error': 'Please use activation code first.'})
+
+        if not User.objects.filter(username=phone_number, is_active=True):
+            return render(request, 'password_reset_form.html', {'form': form, 'error': 'Phone number is not registered.'})
         if form.is_valid():
             password = request.POST.get('new_password1')
             user_obj = get_object_or_404(User, username=phone_number)

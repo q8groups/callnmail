@@ -65,27 +65,23 @@ class PasswordResetForm(forms.Form):
     phone_number = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'Mobile', 'required': 'true'}))
     new_password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'New Password', 'required': 'true'}))
     new_password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Repeat New Password', 'required': 'true'}))
-    secret_token = forms.IntegerField(widget=forms.PasswordInput(attrs={'placeholder': 'Secret Token', 'required': 'true'}))
 
+    # def clean_phone_number(self):
+    #
+    #
+    #     return self.cleaned_data.get('phone_number')
 
-
-    def clean_phone_number(self):
-        if not User.objects.filter(username=self.cleaned_data.get('phone_number'), is_active=True):
-            raise forms.ValidationError('This phone number is not registered.')
-
-        return self.cleaned_data.get('phone_number')
-
-    def clean_secret_token(self):
-        try:
-            user_obj = User.objects.get(username=self.cleaned_data.get('phone_number'))
-        except User.DoesNotExist:
-            raise forms.ValidationError('Invalid token.')
-
-
-        if not ForgotPasswordToken.objects.filter(user=user_obj, secret_token=self.cleaned_data.get('secret_token')):
-            raise forms.ValidationError('Invalid token.')
-
-        return self.cleaned_data.get('secret_token')
+    # def clean_secret_token(self):
+    #     try:
+    #         user_obj = User.objects.get(username=self.cleaned_data.get('phone_number'))
+    #     except User.DoesNotExist:
+    #         raise forms.ValidationError('Invalid token.')
+    #
+    #
+    #     if not ForgotPasswordToken.objects.filter(user=user_obj, secret_token=self.cleaned_data.get('secret_token')):
+    #         raise forms.ValidationError('Invalid token.')
+    #
+    #     return self.cleaned_data.get('secret_token')
 
     def clean(self):
         password1 = self.cleaned_data.get('new_password1')

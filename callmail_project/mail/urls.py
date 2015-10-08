@@ -2,7 +2,7 @@ from django.conf.urls import patterns, include, url
 
 from .views import HomePage, RegistrationView, LoginView, MailListView, MailDetailView, download_attachment, PasswordResetView, PasswordResetRequestView, MailForwardCreateView, MailForwardListView, \
     AboutView, ActivateUser, ContactView, FAQView, PrivacyView, ProfileView, PasswordChangeView, LogoutView, \
-    ChangeAvatar,TestTemplate
+    ChangeAvatar, TestTemplate, PasswordResetValidateToken
 
 urlpatterns = patterns('',
     url(r'^$', HomePage.as_view(), name='index'),
@@ -20,6 +20,7 @@ urlpatterns = patterns('',
     url(r'^mail/(?P<pk>\d+)/$', MailDetailView.as_view(), name='mail_detail'),
     url(r'^download/(?P<pk>\d+)/$', download_attachment, name='download_attachment'),
     url(r'^reset-password/$', PasswordResetView.as_view(), name='reset_password'),
+    url(r'^validate-reset-token/$', PasswordResetValidateToken.as_view(), name='validate_token'),
     url(r'^reset-password-request/$', PasswordResetRequestView.as_view(), name='reset_password_request'),
     url(r'^change-password/$', PasswordChangeView.as_view(), name='change_password'),
     url(r'^mail-forward/$', MailForwardListView.as_view(), name='mailforward_list'),
