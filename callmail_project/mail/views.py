@@ -50,7 +50,7 @@ class RegistrationView(generic.View):
             last_name = request.POST.get('last_name')
             avatar = request.FILES.get('avatar')
             activation_code = generate_random_number()
-            message = 'User created for %s. Your activation code is %s' % (phone_number, str(activation_code))
+            message = settings.SMS_MSG_ACTIVATION.format(activation_code)
 
             try:
                 user = User.objects.get(username=phone_number)
@@ -217,7 +217,7 @@ class PasswordResetRequestView(generic.View):
                 token_check.delete()
 
             ForgotPasswordToken.objects.create(user=user_obj, secret_token=random_number)
-            send_sms(phone_number, message=settings.SMS_MSG_ACTIVATION.format(random_number))
+            send_sms(phone_number, message=settings.SMS_MSG_PASSWORD.format(random_number))
             return HttpResponseRedirect(reverse('mail:validate_token'))
 
         else:
