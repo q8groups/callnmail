@@ -217,7 +217,7 @@ class PasswordResetRequestView(generic.View):
                 token_check.delete()
 
             ForgotPasswordToken.objects.create(user=user_obj, secret_token=random_number)
-            send_sms(phone_number, message='Your token is %s' % (random_number))
+            send_sms(phone_number, message=settings.SMS_MSG_ACTIVATION.format(random_number))
             return HttpResponseRedirect(reverse('mail:validate_token'))
 
         else:
@@ -273,7 +273,7 @@ class PasswordResetView(generic.View):
             user_obj.set_password(password)
             user_obj.save()
             ForgotPasswordToken.objects.filter(user=user_obj).delete()
-            send_sms(phone_number, message='Password Successfully Reset.')
+            #send_sms(phone_number, message='Password Successfully Reset.')
             return HttpResponseRedirect(reverse('mail:login'))
 
         else:
