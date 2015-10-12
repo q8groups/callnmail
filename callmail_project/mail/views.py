@@ -133,7 +133,7 @@ class ProfileView(LoginRequiredMixin, generic.View):
         return render(request, 'profile.html', {'form': form})
 
     def post(self, request):
-        form = ProfileChangeForm(request.POST or None)
+        form = ProfileChangeForm(request.POST, request.FILES)
         if form.is_valid():
             gender = request.POST.get('gender')
             birthday = request.POST.get('password')
@@ -162,7 +162,7 @@ class ActivateUser(generic.View):
         if form.is_valid():
             country_codes = request.POST.get('country_codes')
             username = request.POST.get('phone_number')
-            username = country_codes + username
+            username = '+' + country_codes + username
             activation_code = request.POST.get('activation_code')
             activation = AccountActivation.objects.filter(user__username=username, activation_code=activation_code)
             if activation.exists():

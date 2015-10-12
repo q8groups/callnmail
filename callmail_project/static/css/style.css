@@ -644,17 +644,17 @@ text-align: center;
 .edit_panel {
     padding: 60px 0;
 }
-.edit_panel a{
-    display: block;
-    width: 100%;
-    max-width: 270px;
-    text-align: center;
-    height: 50px;
-    color: #fff;
-    font-size: 22px;
-    padding: 12px 30px;
-    margin: 0 auto 15px;
-}
+/*.edit_panel a{*/
+    /*display: block;*/
+    /*width: 100%;*/
+    /*max-width: 270px;*/
+    /*text-align: center;*/
+    /*height: 50px;*/
+    /*color: #fff;*/
+    /*font-size: 22px;*/
+    /*padding: 12px 30px;*/
+    /*margin: 0 auto 15px;*/
+/*}*/
 .edit_panel .button{
     background: #c021ce;
 }
