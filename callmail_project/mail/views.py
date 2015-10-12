@@ -356,7 +356,7 @@ class ChangeAvatar(LoginRequiredMixin, generic.View):
         return HttpResponseRedirect(reverse('mail:profile'))
 
     def post(self, request):
-        avatar = request.POST.get('avatar')
+        avatar = request.FILES.get('avatar')
         path = request.POST.get('path')
         if avatar:
             profile = get_object_or_404(UserProfile, user=request.user)
