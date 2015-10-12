@@ -1,61 +1,77 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<section id="main_content" class="sec_profile">
-			<div class="container">
-				<div class="box_container">
+    <section id="main_content"
+             class="sec_profile">
+        <div class="container">
+            <div class="box_container">
 
-						<div class="row">
-							<div class="col-md-4 col-sm-5">
-								{% include 'profile_part.html' %}
-							</div><!-- /p_content -->
-                            <form method="post" action="">
+                <div class="row">
+                    <div class="col-md-4 col-sm-5">
+                        {% include 'profile_part.html' %}
+                    </div>
+                    <!-- /p_content -->
+                    <form method="post"
+                          action="">
                         {% csrf_token %}
-							<div class="col-md-8 col-sm-7">
-								<div class="edit_profile">
-									<div class="sec_title"><h2>My profile</h2></div>
-									<div class="p_content sec_half_left">
-										<div class="custom_input_row input_sex">
-                                            <label for="">Gender</label>
-											{{ form.gender }}
-                                            <p class="text-warning">{{ form.gender.errors }}</p>
-										</div><!-- /custom_input_row -->
+                        <div class="col-md-8 col-sm-7">
+                            <div class="edit_profile">
+                                <div class="sec_title"><h2>My profile</h2></div>
+                                <div class="p_content sec_half_left">
+                                    <div class="custom_input_row input_sex">
+                                        <label for="">Gender</label>
+                                        {{ form.gender }}
+                                        <p class="text-warning">{{ form.gender.errors }}</p>
+                                    </div>
+                                    <!-- /custom_input_row -->
 
-										<div class="custom_input_row">
-											<label for="">Birthday</label>
-											<div class="input_birthday">
-                                                {{ form.age }}
-                                                <p class="text-warning">{{ form.age.errors }}</p>
-											</div>
-										</div><!-- /custom_input_row -->
-										<div class="custom_input_row">
-                                            <label for="">Nationality</label>
-                                            {{ form.country }}
-                                                <p class="text-warning">{{ form.country.errors }}</p>
-										</div><!-- /custom_input_row -->
-									</div><!-- /p_content -->
+                                    <div class="custom_input_row">
+                                        <label for="">Birthday</label>
 
-									<div class="p_content sec_half_right">
-										<div class="edit_panel">
-											<a href="{% url 'mail:change_password' %}">Change Password</a>
-											<button class="button" type="submit">Save Changes</button>
-										</div>
-									</div><!-- /p_content -->
-								</div><!-- /edit_profile -->
-							</div>
-						</div>
-					</form>
-				</div>
+                                        <div class="input_birthday">
+                                            {{ form.age }}
+                                            <p class="text-warning">{{ form.age.errors }}</p>
+                                        </div>
+                                    </div>
+                                    <!-- /custom_input_row -->
+                                    <div class="custom_input_row">
+                                        <label for="">Nationality</label>
+                                        {{ form.country }}
+                                        <p class="text-warning">{{ form.country.errors }}</p>
+                                    </div>
+                                    <!-- /custom_input_row -->
+                                </div>
+                                <!-- /p_content -->
 
-				<div class="row">
-					<div class="col-sm-12">
-						<div class="app_store">
-							<a href="#"><img src="{% static 'images/icon_app_store.png' %}" alt="app_store"></a>
-							<a href="#"><img src="{% static 'images/icon_app_google_play.png' %}" alt="google_play"></a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+                                <div class="p_content sec_half_right">
+                                    <div class="edit_panel">
+                                        <button class="button"
+                                                type="submit">Save Changes
+                                        </button><br><br>
+                                         <a class="button"
+                               href="{% url 'mail:change_password' %}">Change Password</a>
+                                    </div>
+                                </div>
+                                <!-- /p_content -->
+                            </div>
+                            <!-- /edit_profile -->
+
+                        </div>
+                </form>
+
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="app_store">
+                        <a href="#"><img src="{% static 'images/icon_app_store.png' %}"
+                                         alt="app_store"></a>
+                        <a href="#"><img src="{% static 'images/icon_app_google_play.png' %}"
+                                         alt="google_play"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 {% endblock %}
