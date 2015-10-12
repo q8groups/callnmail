@@ -7,7 +7,7 @@ html {
 }
 
 body{
-    font-family: 'AvenirLT-Roman', Arial, sans-serif;
+    font-family: 'AvenirLT-Light', Arial, sans-serif;
     font-weight: normal;
     font-size: 14px;
     line-height: 1.3;
@@ -45,7 +45,7 @@ body{
 
 
 h1, h2, h3, h4, h5, h6{
-    font-family: 'AvenirLT-Roman';
+    font-family: 'AvenirLT-Light';
     margin: 0 0 20px;
     line-height: 1.2;
 }
@@ -76,7 +76,7 @@ ul{
 }
 
 h1{
-    font-family: 'AvenirLT-Roman';
+    font-family: 'AvenirLT-Light';
     font-size: 42px;
     line-height: 1.1;
     font-weight: normal;
@@ -99,7 +99,7 @@ h4{
 }
 
 p{
-    font-family: 'AvenirLT-Roman';
+    font-family: 'AvenirLT-Light';
     font-size: 16px;
     line-height: 1.2;
     margin-bottom: 20px;
@@ -413,11 +413,20 @@ select:-webkit-autofill {
     margin: 0 0 30px;
 }
 .page_title h1{
-    font-family: 'AvenirLT-Roman';
+    font-family: 'AvenirLT-Light';
     font-size: 42px;
     line-height: 1;
     color: #9231a8;
     margin: 0 0 30px;
+}
+
+.text-warning,
+.custom_input_row .errorlist {
+    position: absolute;
+    top: 66px;
+}
+#main_content .login .text-warning{
+    top: 115px;
 }
 
 .content h3{
@@ -428,7 +437,7 @@ select:-webkit-autofill {
     color: #9231a8;
 }
 .content p{
-    font-family: 'AvenirLT-Roman';
+    font-family: 'AvenirLT-Light';
     font-size: 16px;
     line-height: 1.2;
     margin-bottom: 15px;
@@ -484,6 +493,17 @@ select:-webkit-autofill {
 .contact_form{
     position: relative;
     margin: 0 0 30px;
+}
+
+.contact_form .form-group > input {
+margin-bottom: 5px;
+}
+
+.p_content .edit_panel {
+text-align: center;
+}
+.edit_profile .p_content label {
+    line-height: normal;
 }
 .cf_btn_group{
     text-align: right;
@@ -543,7 +563,7 @@ select:-webkit-autofill {
     border-bottom: none;
 }
 .sidebar_menu li a{
-    font-family: 'AvenirLT-Roman';
+    font-family: 'AvenirLT-Light';
     display: block;
     padding: 10px 5px;
     color: #999;
@@ -625,17 +645,17 @@ select:-webkit-autofill {
 .edit_panel {
     padding: 60px 0;
 }
-.edit_panel a{
-    display: block;
-    width: 100%;
-    max-width: 270px;
-    text-align: center;
-    height: 50px;
-    color: #fff;
-    font-size: 22px;
-    padding: 12px 30px;
-    margin: 0 auto 15px;
-}
+/*.edit_panel a{*/
+    /*display: block;*/
+    /*width: 100%;*/
+    /*max-width: 270px;*/
+    /*text-align: center;*/
+    /*height: 50px;*/
+    /*color: #fff;*/
+    /*font-size: 22px;*/
+    /*padding: 12px 30px;*/
+    /*margin: 0 auto 15px;*/
+/*}*/
 .edit_panel .button{
     background: #c021ce;
 }
@@ -643,12 +663,15 @@ select:-webkit-autofill {
 .custom_input_row{
     border: 1px solid #942d9d;
     border-radius: 25px;
-    height: 50px;
+    position: relative;
     width: 100%;
     display: inline-block;
     margin-bottom: 15px;
     padding: 14px 25px;
 }
+.p_content .custom_input_row:nth-child(2) .errorlist{
+    top: 35px;
+} 
 
 .input_sex span,
 .box_container label{
@@ -663,7 +686,7 @@ select:-webkit-autofill {
     line-height: 1;
 }
 .box_container label{
-    padding-top: 2px;
+    padding-bottom: 2px;
 
 }
 .box_container input{
@@ -816,7 +839,7 @@ select:-webkit-autofill {
 }
 
 .tab_panel .nav-tabs > li > a{
-    font-family: 'AvenirLT-Roman';
+    font-family: 'AvenirLT-Light';
     font-size: 20px;
     line-height: 1.2;
     text-align: center;

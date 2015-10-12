@@ -420,16 +420,14 @@ select:-webkit-autofill {
     margin: 0 0 30px;
 }
 
-.text-warning {
-position: absolute;
-top: 66px;
+.text-warning,
+.custom_input_row .errorlist {
+    position: absolute;
+    top: 66px;
 }
-
-.custom_input_row .errorlist{
-position: absolute;
-top: 66px;
+#main_content .login .text-warning{
+    top: 115px;
 }
-
 
 .content h3{
     font-family: 'AvenirLT-Medium';
@@ -501,8 +499,11 @@ top: 66px;
 margin-bottom: 5px;
 }
 
-p_content .edit_panel {
+.p_content .edit_panel {
 text-align: center;
+}
+.edit_profile .p_content label {
+    line-height: normal;
 }
 .cf_btn_group{
     text-align: right;
@@ -662,12 +663,15 @@ text-align: center;
 .custom_input_row{
     border: 1px solid #942d9d;
     border-radius: 25px;
-position: relative;
+    position: relative;
     width: 100%;
     display: inline-block;
     margin-bottom: 15px;
     padding: 14px 25px;
 }
+.p_content .custom_input_row:nth-child(2) .errorlist{
+    top: 35px;
+} 
 
 .input_sex span,
 .box_container label{
