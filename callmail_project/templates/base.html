@@ -98,8 +98,8 @@
                                 {% else %}
 								<li><a href="{% url 'mail:login' %}">Login/Sign up</a></li>
 								{% endif %}
-                                <li><a href="#">FAQ</a></li>
-								<li><a href="#">Privacy Policy</a></li>
+                                <li><a href="{% url 'mail:faq' %}">FAQ</a></li>
+								<li><a href="{% url 'mail:privacy' %}">Privacy Policy</a></li>
 								<li><a href="{% url 'mail:contact' %}">Contact Us</a></li>
 							</ul>
 						</div><!-- /footer_menu -->
