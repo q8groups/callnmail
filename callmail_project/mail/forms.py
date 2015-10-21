@@ -45,9 +45,7 @@ class LoginForm(forms.Form):
 
 
 class ActivateForm(forms.Form):
-    phone_number = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'Mobile', 'required': 'true'}))
     activation_code = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'Activation Code', 'required': 'true'}))
-
 
 
 class PasswordResetRequestForm(forms.Form):

@@ -41,6 +41,7 @@ class RegistrationView(generic.View):
             country_codes = request.POST.get('country_code')
             phone_number = request.POST.get('phone_number')
             phone_number = "+" + country_codes + phone_number
+            request.session['phone_number'] = phone_number
             if User.objects.filter(username=phone_number, is_active=True).exists():
                 return render(request, 'registration.html', {'form': LoginForm(), 'rform': rform,
                                                     'number_error': 'User with that phone number already exists.'})
@@ -107,7 +108,6 @@ class LoginView(generic.View):
             print username
             password = request.POST.get('password')
             user = authenticate(username=username, password=password)
-            print user
             if user is not None and user.is_active:
                 login(request, user)
                 return HttpResponseRedirect('/')
@@ -159,10 +159,13 @@ class ActivateUser(generic.View):
 
     def post(self, request):
         form = ActivateForm(request.POST or None)
+        try:
+            phone_number = request.session['phone_number']
+        except KeyError:
+            return render(request, 'activate_account.html', {'form': form, 'error': 'Please register first.'})
         if form.is_valid():
-            country_codes = request.POST.get('country_codes')
-            username = request.POST.get('phone_number')
-            username = '+' + country_codes + username
+            username = phone_number
+            del request.session['phone_number']
             activation_code = request.POST.get('activation_code')
             activation = AccountActivation.objects.filter(user__username=username, activation_code=activation_code)
             if activation.exists():
@@ -171,7 +174,8 @@ class ActivateUser(generic.View):
                 user.save()
                 AccountActivation.objects.filter(user=user).delete()
                 messages.success(request, 'Account successfully activated.')
-                return HttpResponseRedirect(reverse('mail:login'))
+                login(request, user)
+                return HttpResponseRedirect('/')
             else:
                 return render(request, 'activate_account.html', {'form': form, 'error': 'Invalid Activation Code.'})
 
