@@ -7,7 +7,7 @@ from .views import HomePage, RegistrationView, LoginView, MailListView, MailDeta
 urlpatterns = patterns('',
     url(r'^$', HomePage.as_view(), name='index'),
     url(r'^about/$', AboutView.as_view(), name='about'),
-    url(r'^test/$', TestTemplate.as_view(), name='test-template'),
+    # url(r'^test/$', TestTemplate.as_view(), name='test-template'),
     url(r'^contact/$', ContactView.as_view(), name='contact'),
     url(r'^profile/$', ProfileView.as_view(), name='profile'),
     url(r'^faq/$', FAQView.as_view(), name='faq'),
