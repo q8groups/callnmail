@@ -115,7 +115,11 @@
                                                                     </select>
 {#																	<a href="#">+965 <i class="fa fa-angle-down"></i></a>#}
 																</span>
-																{{ rform.phone_number }}
+															{% if request.session.phone_number %}
+															{{ request.session.phone_number }}
+															{% else %}
+                                                                    {{ rform.phone_number }}
+															{% endif %}
 																<a class="input_add_on" href="#"><i class="fa fa-phone"></i></a>
                                                                 <p class="text-warning">{{ number_error }}</p>
 															</div>
