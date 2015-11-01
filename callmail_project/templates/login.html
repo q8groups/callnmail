@@ -2277,6 +2277,8 @@
 
 																	</option>
 
+
+
 																    <option class="country" value="965" data-country-code="kw" selected="selected">
 																	<div class="flag">
 																            <div class="iti-flag kw"></div>
@@ -4614,7 +4616,7 @@
 																<a class="input_add_on" href="#"><i class="fa fa-phone"></i></a>
                                                                 <p class="text-warning">{{ rform.phone_number.errors }}</p>
 
-																<input class="phone_number" name="phone_number" type="tel" value="">
+																<input class="phone_number" name="phone_number" type="tel" value="{{ request.session.phone_number }}">
 																<div class="fuzzSearch county_search_signup">
 																	<div class="fuzzNameContainer country_name">
 																		<span class="fuzzName"></span>

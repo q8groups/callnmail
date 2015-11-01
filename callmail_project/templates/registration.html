@@ -34,7 +34,12 @@
 																<span class="country_code">
                                                                     {% country_code_prefix as codes %}
                                                                     <select name="country_codes">
+																	{% if request.session.country_codes %}
+																		<option selected="selected">+{{ request.session.country_codes  }}</option>
+
+																	{% else %}
 																		<option selected="selected">+965</option>
+																	{% endif %}
 
                                                                         {% for code in codes %}
                                                                         <option>{{ code }}</option>
@@ -42,7 +47,11 @@
                                                                     </select>
 {#																	<a href="#">+965 <i class="fa fa-angle-down"></i></a>#}
 																</span>
+															{% if request.session.phone_number %}
+															{{ request.session.phone_number }}
+															{% else %}
                                                                     {{ form.phone_number }}
+															{% endif %}
 																<a class="input_add_on" href="#"><i class="fa fa-phone"></i></a>
                                                               <p class="text-warning">{{ form.phone_number.errors }}</p>
 

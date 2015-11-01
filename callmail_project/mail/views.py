@@ -99,9 +99,12 @@ class LoginView(generic.View):
     def post(self, request):
         country_codes = request.POST.get('country_codes','')
         phone_number = request.POST.get('phone_number','')
+        request.session['phone_number'] = phone_number
+        request.session['country_codes'] = country_codes
         phone_number = "+"+country_codes + phone_number
         request.POST = request.POST.copy()
         request.POST['phone_number']=phone_number
+
         form = LoginForm(request.POST or None)
         if form.is_valid():
             username = phone_number
