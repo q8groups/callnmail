@@ -4,7 +4,6 @@ from django_countries.fields import CountryField
 from tinymce import models as tinymce_models
 
 GENDER = [
-    ('', 'Not Set'),
     ('M', 'Male'),
     ('F', 'Female')
 ]

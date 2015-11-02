@@ -27,7 +27,9 @@ jQuery(document).ready(function($) {
 
   });
 
-
+	$('#id_age').datetimepicker({
+ timepicker:false,
+});
 
 
 

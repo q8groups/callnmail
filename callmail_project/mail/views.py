@@ -177,6 +177,7 @@ class ActivateUser(generic.View):
                 user.save()
                 AccountActivation.objects.filter(user=user).delete()
                 messages.success(request, 'Account successfully activated.')
+                user.backend = 'django.contrib.auth.backends.ModelBackend'
                 login(request, user)
                 return HttpResponseRedirect('/')
             else:
