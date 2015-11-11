@@ -338,6 +338,11 @@ class MailForwardListView(LoginRequiredMixin, generic.ListView):
         return MailForward.objects.filter(user=self.request.user)
 
 
+def delete_mail_forward(request, pk):
+    mail_forward = get_object_or_404(MailForward, pk=pk).delete()
+    return HttpResponseRedirect(reverse_lazy('mail:mailforward_list'))
+
+
 class MailForwardCreateView(LoginRequiredMixin, generic.CreateView):
     model = MailForward
     template_name = 'mail_forward_create.html'
