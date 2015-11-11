@@ -130,7 +130,8 @@ class LogoutView(generic.View):
 
 class ProfileView(LoginRequiredMixin, generic.View):
     def get(self, request):
-        data = {'gender': request.user.userprofile.gender, 'age': request.user.userprofile.age,
+        data = {'first_name': request.user.first_name, 'last_name': request.user.last_name,
+                'gender': request.user.userprofile.gender, 'age': request.user.userprofile.age,
                 'country': request.user.userprofile.country}
         form = ProfileChangeForm(initial=data)
         return render(request, 'profile.html', {'form': form})
@@ -141,7 +142,15 @@ class ProfileView(LoginRequiredMixin, generic.View):
             gender = request.POST.get('gender')
             birthday = request.POST.get('password')
             country = request.POST.get('country')
+            first_name = request.POST.get('first_name')
+            last_name = request.POST.get('last_name')
             profile = get_object_or_404(UserProfile, user=request.user)
+            user = get_object_or_404(User, user=request.user)
+            if first_name:
+                user.first_name = first_name
+            if last_name:
+                user.last_name = last_name
+                user.save()
             if gender:
                 profile.gender = gender
             if birthday:

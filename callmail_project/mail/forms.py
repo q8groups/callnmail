@@ -105,9 +105,12 @@ class ChangePasswordForm(forms.Form):
 
 
 class ProfileChangeForm(forms.ModelForm):
+    first_name = forms.CharField(max_length=255, required=False)
+    last_name = forms.CharField(max_length=255, required=False)
+
     class Meta:
         model = UserProfile
-        fields = ('gender', 'age', 'country')
+        fields = ('first_name', 'last_name', 'gender', 'age', 'country')
 
 
 class ContactUsForm(forms.ModelForm):

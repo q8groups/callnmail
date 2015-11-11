@@ -18,6 +18,22 @@
                             <div class="edit_profile">
                                 <div class="sec_title"><h2>My profile</h2></div>
                                 <div class="p_content sec_half_left">
+                                    <div class="custom_input_row">
+                                        <label for="" style="font-size: 16px;">First Name</label>
+
+                                        <div class="input_birthday">
+                                            {{ form.first_name }}
+                                            <p class="text-warning">{{ form.first_name.errors }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="custom_input_row">
+                                        <label for="" style="font-size: 16px;">Last Name</label>
+
+                                        <div class="input_birthday">
+                                            {{ form.last_name }}
+                                            <p class="text-warning">{{ form.last_name.errors }}</p>
+                                        </div>
+                                    </div>
                                     <div class="custom_input_row input_sex">
                                         <label for="">Gender</label>
                                         {{ form.gender }}

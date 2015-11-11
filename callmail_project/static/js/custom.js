@@ -1,7 +1,7 @@
 jQuery(document).ready(function($) {
 
-
-    $('.fuzzOptionsList.login').fuzzyDropdown({
+if ( $( "#login" ).length ) {
+	$('.fuzzOptionsList.login').fuzzyDropdown({
 		mainContainer: '.county_search_login',
 		arrowUpClass: 'fuzzArrowUp',
 		selectedClass: 'selected',
@@ -14,10 +14,10 @@ jQuery(document).ready(function($) {
 		selectedClass: 'selected',
 		enableBrowserDefaultScroll: true
 	});
-
+}
 
 	$("#avatarUpload").click(function(evt){
-		evt.s
+		evt.s;
 
     // do something
 
@@ -27,9 +27,10 @@ jQuery(document).ready(function($) {
 
   });
 
-	$('#id_age').datetimepicker({
- timepicker:false,
-});
+//	$('#id_age').datetimepicker({
+// timepicker:false,
+//});
+	$('#id_age').datepicker();
 
 
 
