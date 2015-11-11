@@ -10,6 +10,8 @@ from django.core.urlresolvers import reverse, reverse_lazy
 from django.conf import settings
 from django.contrib.messages.views import SuccessMessageMixin
 
+from dateutil import parser
+
 from braces.views import LoginRequiredMixin
 
 from .forms import RegistrationForm, LoginForm, PasswordResetRequestForm, PasswordResetForm, ActivateForm, \
@@ -140,7 +142,7 @@ class ProfileView(LoginRequiredMixin, generic.View):
         form = ProfileChangeForm(request.POST, request.FILES)
         if form.is_valid():
             gender = request.POST.get('gender')
-            birthday = request.POST.get('password')
+            birthday = request.POST.get('age')
             country = request.POST.get('country')
             first_name = request.POST.get('first_name')
             last_name = request.POST.get('last_name')
@@ -153,7 +155,7 @@ class ProfileView(LoginRequiredMixin, generic.View):
             if gender:
                 profile.gender = gender
             if birthday:
-                profile.age = birthday
+                profile.age = parser.parse(birthday)
             if country:
                 profile.country = country
             profile.save()

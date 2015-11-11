@@ -27,10 +27,7 @@ if ( $( "#login" ).length ) {
 
   });
 
-//	$('#id_age').datetimepicker({
-// timepicker:false,
-//});
-//	$('#id_age').datepicker();
+	$('#id_age').datepicker({ dateFormat: 'yy-mm-dd' });
 
 	 $("#id_avatar").change(function(){
         $("#avatarform").submit();
