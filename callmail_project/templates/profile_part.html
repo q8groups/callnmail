@@ -4,11 +4,14 @@
           action="{% url 'mail:change_avatar' %}"
           enctype="multipart/form-data">
         {% csrf_token %}
+
         <div class="profile_pics">
-            <input type="file"
-                   id="id_avatar"
-                   name="avatar"
-                   style="position: absolute; margin-top: -40px;"/>
+        <div style="margin-top: -40px; text-align:center;">
+        <a href="#" onclick="document.getElementById('id_avatar').click(); return false;"><i id="mycamera" class="fa fa-camera">
+
+																Your Photo</i></a>
+        <input type="file" id="id_avatar" name="avatar" style="visibility: hidden;" />
+        </div>
             {% if user.userprofile.avatar %}
                 <img src="{{ user.userprofile.avatar.url }}"
                      alt="profile_img">
@@ -22,4 +25,5 @@
     <span class="name">{% if user.first_name or user.last_name %}{{ user.first_name }}
         {{ user.last_name }}
     {% else %}{{ user }}{% endif %}</span>
+
 </div>

@@ -14,6 +14,7 @@ if ( $( "#login" ).length ) {
 		selectedClass: 'selected',
 		enableBrowserDefaultScroll: true
 	});
+
 }
 
 	$("#avatarUpload").click(function(evt){
