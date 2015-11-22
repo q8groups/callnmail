@@ -236,7 +236,8 @@ class PasswordResetRequestView(generic.View):
 
             ForgotPasswordToken.objects.create(user=user_obj, secret_token=random_number)
             send_sms(phone_number, message=settings.SMS_MSG_PASSWORD.format(random_number))
-            return HttpResponseRedirect(reverse('mail:validate_token', kwargs={'username': phone_number}))
+            request.session['username'] = phone_number
+            return HttpResponseRedirect(reverse('mail:validate_token'))
 
         else:
             return render(request, 'password_reset_request_form.html', {'form': form})
@@ -250,7 +251,7 @@ class PasswordResetValidateToken(generic.View):
     def post(self, request):
         form = ActivateForm(request.POST or None)
         if form.is_valid():
-            username = self.kwargs['username']
+            username = request.session['username']
             activation_code = request.POST.get('activation_code')
             activation = ForgotPasswordToken.objects.filter(user__username=username, secret_token=activation_code)
             if activation.exists():
