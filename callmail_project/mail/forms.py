@@ -46,6 +46,7 @@ class LoginForm(forms.Form):
 
 class ActivateForm(forms.Form):
     activation_code = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'Activation Code', 'required': 'true'}))
+    username = forms.HiddenInput()
 
 
 class PasswordResetRequestForm(forms.Form):
