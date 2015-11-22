@@ -168,6 +168,6 @@ def fetch_email(message):
             user.set_unusable_password()
             user.userprofile.created_by_server=True
             user.userprofile.save()
-            send_sms(user.username, settings.SMS_NEW_USER)
+            send_sms(user_phonenumber, settings.SMS_NEW_USER)
             return "User Created"
 
