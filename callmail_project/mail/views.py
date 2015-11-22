@@ -244,8 +244,8 @@ class PasswordResetRequestView(generic.View):
 
 
 class PasswordResetValidateToken(generic.View):
-    def get(self, request, username):
-        form = ActivateForm(username=username)
+    def get(self, request):
+        form = ActivateForm()
         return render(request, 'activate_account.html', {'form': form})
 
     def post(self, request):
