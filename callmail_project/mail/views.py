@@ -271,9 +271,7 @@ class PasswordResetView(generic.View):
         return render(request, 'password_reset_form.html', {'form': PasswordResetForm()})
 
     def post(self, request):
-        country_codes = request.POST.get('country_codes','')
-        phone_number = request.POST.get('phone_number','')
-        phone_number = "+" + country_codes + phone_number
+        phone_number = request.session['username']
         request.POST = request.POST.copy()
         request.POST['phone_number'] = phone_number
         form = PasswordResetForm(request.POST)

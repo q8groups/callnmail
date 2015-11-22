@@ -60,7 +60,6 @@ class PasswordResetRequestForm(forms.Form):
 
 
 class PasswordResetForm(forms.Form):
-    phone_number = forms.IntegerField(widget=forms.TextInput(attrs={'placeholder': 'Mobile', 'required': 'true'}))
     new_password1 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'New Password', 'required': 'true'}))
     new_password2 = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'Repeat New Password', 'required': 'true'}))
 
