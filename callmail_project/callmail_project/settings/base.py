@@ -284,7 +284,7 @@ djcelery.setup_loader()
 BROKER_URL = 'redis://callnmailsm.wxx3ba.0001.euw1.cache.amazonaws.com:6379/0'
 
 CELERY_RESULT_BACKEND = 'redis'
-CELERY_REDIS_HOST = '127.0.0.1'
+CELERY_REDIS_HOST = 'callnmailsm.wxx3ba.0001.euw1.cache.amazonaws.com'
 CELERY_REDIS_PORT = 6379
 CELERY_REDIS_DB = 0
 
