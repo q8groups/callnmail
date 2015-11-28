@@ -130,7 +130,7 @@ SECRET_KEY = r"p)8kwh0imhlvi3s-05gdk0irp0-0qcrc^no(6$^0bo%%h+)tz#"
 ########## SITE CONFIGURATION
 # Hosts/domain names that are valid for this site
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['callmail.labelag.com', 'localhost', '127.0.0.1', 'www.callmail.labelag.com',]
+ALLOWED_HOSTS = ['callnmail.com', 'localhost', '127.0.0.1', 'www.callnmail.com',]
 ########## END SITE CONFIGURATION
 
 
