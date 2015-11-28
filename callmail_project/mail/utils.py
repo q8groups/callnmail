@@ -161,6 +161,7 @@ def fetch_email(message):
                     msg.attach_alternative(html_content, "text/html")
                     msg.send()
                     send_notification(user.username,subject)
+                    message.delete()
                     return "Sent Succesfully"
                 return "User is not Active"
         except User.DoesNotExist:
