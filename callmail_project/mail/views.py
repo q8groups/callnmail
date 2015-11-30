@@ -358,6 +358,8 @@ class AboutView(generic.TemplateView):
     template_name = 'about.html'
 
 
+
+
 class ContactView(SuccessMessageMixin, generic.CreateView):
     template_name = 'contact.html'
     form_class = ContactUsForm
