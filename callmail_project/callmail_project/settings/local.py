@@ -67,3 +67,10 @@ REST_FRAMEWORK = {
 # http://django-debug-toolbar.readthedocs.org/en/latest/installation.html
 INTERNAL_IPS = ('127.0.0.1',)
 ########## END TOOLBAR CONFIGURATION
+
+
+EMAIL_SUBJECT_PREFIX = 'Callnmail Server'
+
+SERVER_EMAIL = 'server@callnmail.com'
+EMAIL_HOST_USER = SERVER_EMAIL
+
