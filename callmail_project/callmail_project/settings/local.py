@@ -27,8 +27,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'callnmail',
-        'USER': 'callnmail00',
-        'PASSWORD': 'noKia623000',
+        'USER': 'callnmail',
+        'PASSWORD': 'noKia6230',
         'HOST': 'callnmail.ctgrepj1cb4h.eu-west-1.rds.amazonaws.com',
         'PORT': '',
     }
