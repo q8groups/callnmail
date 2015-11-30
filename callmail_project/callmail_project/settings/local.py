@@ -71,6 +71,16 @@ INTERNAL_IPS = ('127.0.0.1',)
 
 EMAIL_SUBJECT_PREFIX = 'Callnmail Server'
 
+SERVER_EMAIL = 'server@callnmail.com'
+EMAIL_HOST_USER = SERVER_EMAIL
+
+
+
+
+"""
+
+EMAIL_SUBJECT_PREFIX = 'Callnmail Server'
+
 
 
 
@@ -95,4 +105,5 @@ EMAIL_PORT = 587
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#email-use-tls
 EMAIL_USE_TLS = True
 
+"""
 
