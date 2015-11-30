@@ -79,7 +79,7 @@ class ContactUs(models.Model):
 
 
 @receiver(post_save, sender=ContactUs)
-def create_auth_token(sender, instance=None, created=False, **kwargs):
+def SendEmailContactUs(sender, instance=None, created=False, **kwargs):
     if created:
         msg = EmailMultiAlternatives(instance.subject, instance.message, instance.contact_email, ['contact@callnmail.com',])
         msg.send()
