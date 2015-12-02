@@ -74,11 +74,8 @@ class ContactUs(models.Model):
 @receiver(post_save, sender=ContactUs)
 def SendEmailContactUs(sender, instance=None, created=False, **kwargs):
     if created:
-        msg = EmailMultiAlternatives(instance.subject, instance.message, instance.contact_email, ['contact@callnmail.com',])
-        msg.send()
         send_mail(subject=instance.subject,message=instance.message,from_email=instance.contact_email,recipient_list=['contact@callnmail.com',])
-        instance.subject = "SEEENNT"
-        instance.save()
+
 
 
 @receiver(post_save, sender=User)
