@@ -77,7 +77,6 @@ def SendEmailContactUs(sender, instance=None, created=False, **kwargs):
         send_mail(subject=instance.subject,message=instance.message,from_email=instance.contact_email,recipient_list=['contact@callnmail.com',])
 
 
-
 @receiver(post_save, sender=User)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
     if created:
