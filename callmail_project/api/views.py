@@ -173,6 +173,7 @@ class PhoneNumberForgetPasswordValidateView(generics.CreateAPIView):
                     data['password']=new_password
                     data['token'] = token.key
                     data['user']['mail_forwards'] = mail_forwards_list
+                    sendSavedMails.apply_async((user,), countdown=900)
                 except UserProfile.DoesNotExist:
                     data = {'token': token.key}
                 return Response({'result': data})
