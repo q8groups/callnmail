@@ -333,4 +333,4 @@ MAIL_CLEAN_PERIOD = 7
 
 SMS_MSG_ACTIVATION = "Here's your CallnMail mobile confirmation code : {0} . Enter this in the app or website to verify your mobile number."
 SMS_MSG_PASSWORD = " Here's your CallnMail mobile confirmation code : {0} . Enter this in the app or website and choose your new password."
-SMS_NEW_USER = "You just received an email. To view it download CallnMail for android https://goo.gl/h9gfct ,IPhone https://goo.gl/ldcnM4 or visit www.callnmail.com ."
+SMS_NEW_USER = "You just received an email. To view it download CallnMail for android https://goo.gl/ZUMyBu ,IPhone https://goo.gl/ldcnM4 or visit www.callnmail.com ."
