@@ -3,8 +3,7 @@ from django.contrib import admin
 from .models import Mail, MailAttachment, MailForward, ForgotPasswordToken, AccountActivation, ContactUs
 
 class MailForwardAdmin(admin.ModelAdmin):
-    list_display = ("email","user__username")
-    search_fields = ("email","user__username")
+    list_display = ("email","user")
 
 
 #admin.site.register(Mail)
