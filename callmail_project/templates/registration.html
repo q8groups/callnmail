@@ -2,6 +2,9 @@
 {% load static %}
 {% load country_tags %}
 
+{% block extra_css %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/fuzzyDropdown.css' %}">
+{% endblock extra_css %}
 
 {% block extra_js %}
 <script type="text/javascript" src="{% static 'js/fuse.min.js' %}"></script>
