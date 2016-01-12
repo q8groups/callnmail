@@ -29,7 +29,7 @@
 
 								<div class="box_container">
 									<div class="tab-content">
-										<div role="tabpanel" class="tab-pane active" id="login_tab">
+										<div role="tabpanel" class="tab-pane" id="login_tab">
 											<div class="tab_item_content">
 												<div class="reg_content login">
 													<form method="post" action="">
@@ -2335,7 +2335,7 @@
 											</div>
 										</div><!-- /tab_item_content -->
 
-										<div role="tabpanel" class="tab-pane" id="create_account">
+										<div role="tabpanel" class="tab-pane active" id="create_account">
 											<div class="tab_item_content">
                                                 <form action="{% url 'mail:registration' %}" method="post">
                                                         {% csrf_token %}
