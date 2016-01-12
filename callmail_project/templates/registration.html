@@ -56,11 +56,8 @@
                                                                     </select>
 {#																	<a href="#">+965 <i class="fa fa-angle-down"></i></a>#}
 																</span>
-															{% if request.session.phone_number %}
-															{{ request.session.phone_number }}
-															{% else %}
+
                                                                     {{ form.phone_number }}
-															{% endif %}
 																<a class="input_add_on" href="#"><i class="fa fa-phone"></i></a>
                                                               <p class="text-warning">{{ form.phone_number.errors }}</p>
 
