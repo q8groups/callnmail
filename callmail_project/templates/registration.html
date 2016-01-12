@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load country_tags %}
+
+
+{% block extra_js %}
+<script type="text/javascript" src="{% static 'js/fuse.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/fuzzyDropdown.js' %}"></script>
+{% endblock extra_js %}
 {% block content %}
 
 <section id="login" class="registration bg_gray">
