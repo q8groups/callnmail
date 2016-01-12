@@ -37,7 +37,7 @@ class RegistrationView(generic.View):
             return HttpResponseRedirect(reverse('mail:mailforward_list'))
         rform = RegistrationForm()
         form = LoginForm()
-        return render(request, 'login.html', {'form': form, 'rform': rform})
+        return render(request, 'login2.html', {'form': form, 'rform': rform})
 
     def post(self, request):
         rform = RegistrationForm(request.POST, request.FILES or None)
@@ -45,9 +45,9 @@ class RegistrationView(generic.View):
             country_codes = request.POST.get('country_code')
             phone_number = request.POST.get('phone_number')
             phone_number = "+" + country_codes + phone_number
-            request.session['phone_number'] = phone_number
+            request.session['phone_number'] = request.POST.get('phone_number')
             if User.objects.filter(username=phone_number, is_active=True).exists():
-                return render(request, 'login.html', {'form': LoginForm(), 'rform': rform,
+                return render(request, 'login2.html', {'form': LoginForm(), 'rform': rform,
                                                     'number_error': 'User with that phone number already exists.'})
 
             password = request.POST.get('password1')
@@ -90,7 +90,7 @@ class RegistrationView(generic.View):
             AccountActivation.objects.create(user=user, activation_code=activation_code)
             return HttpResponseRedirect(reverse('mail:activate_user'))
         else:
-            return render(request, 'login.html', {'form': LoginForm(), 'rform': rform})
+            return render(request, 'login2.html', {'form': LoginForm(), 'rform': rform})
 
 
 class LoginView(generic.View):
