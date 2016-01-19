@@ -873,13 +873,14 @@ text-align: center;
     margin: 0 20px 20px;
 }
 
-.reg_content input{  border: 2px solid #c021ce;
+.reg_content input{
+    border: 2px solid #c021ce;
     border-radius: 0;
     height: 44px;
     text-align: center;
     width: 100%;}
 
-}
+
 
 .login{
     margin: 0 50px 0 0;

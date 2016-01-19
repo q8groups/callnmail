@@ -74,7 +74,7 @@ class ContactUs(models.Model):
 @receiver(post_save, sender=ContactUs)
 def SendEmailContactUs(sender, instance=None, created=False, **kwargs):
     if created:
-        send_mail(subject=instance.subject,message=instance.message,from_email=instance.contact_email,recipient_list=['contact@callnmail.com',])
+        send_mail(subject=instance.subject,message=instance.message,from_email=instance.contact_email,recipient_list=['mohammad@labelag.com',])
 
 
 @receiver(post_save, sender=User)
