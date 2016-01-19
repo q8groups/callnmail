@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 
 
-from .models import ForgotPasswordToken, ContactUs
+from .models import ForgotPasswordToken, ContactUs,MailForward
 from advertisement.models import UserProfile
 
 
@@ -122,3 +122,10 @@ class ContactUsForm(forms.ModelForm):
             'message': forms.Textarea(attrs={'placeholder': 'Message'}),
 
         }
+
+class MailForwardForm(forms.ModelForm):
+    email = forms.CharField(widget=forms.EmailField(attrs={'placeholder': 'Email', 'required': 'true'}))
+    title = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Title', 'required': 'true'}))
+    class Meta:
+        model = MailForward
+        fields = ('email', 'title', 'user')

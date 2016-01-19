@@ -17,7 +17,7 @@ from dateutil import parser
 from braces.views import LoginRequiredMixin
 
 from .forms import RegistrationForm, LoginForm, PasswordResetRequestForm, PasswordResetForm, ActivateForm, \
-    ChangePasswordForm, ProfileChangeForm, ContactUsForm
+    ChangePasswordForm, ProfileChangeForm, ContactUsForm,MailForwardForm
 from .utils import send_sms, determine_mime_type, generate_random_number
 from .models import Mail, MailAttachment, ForgotPasswordToken, MailForward, AccountActivation
 from advertisement.models import UserProfile
@@ -347,8 +347,7 @@ class MailForwardCreateView(LoginRequiredMixin, generic.CreateView):
     model = MailForward
     template_name = 'mail_forward_create.html'
     success_url = reverse_lazy('mail:mailforward_list')
-    fields = ('email','title')
-
+    form_class = MailForwardForm
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super(MailForwardCreateView, self).form_valid(form)
