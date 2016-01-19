@@ -124,7 +124,7 @@ class ContactUsForm(forms.ModelForm):
         }
 
 class MailForwardForm(forms.ModelForm):
-    email = forms.CharField(widget=forms.EmailField(attrs={'placeholder': 'Email', 'required': 'true'}))
+    email = forms.EmailField(widget=forms.EmailField(attrs={'placeholder': 'Email', 'required': 'true'}))
     title = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Title', 'required': 'true'}))
     class Meta:
         model = MailForward
