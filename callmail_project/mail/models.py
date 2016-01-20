@@ -75,7 +75,7 @@ class ContactUs(models.Model):
 def SendEmailContactUs(sender, instance=None, created=False, **kwargs):
     if created:
         headers = {'Reply-To': instance.contact_email}
-        msg = EmailMultiAlternatives(instance.subject, instance.message, instance.message, ['contact@callnmail.com',],headers=headers)
+        msg = EmailMultiAlternatives(instance.subject, instance.message, instance.contact_email, ['contact@callnmail.com',],headers=headers)
         msg.send()
 
 @receiver(post_save, sender=User)
