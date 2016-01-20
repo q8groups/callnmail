@@ -71,12 +71,12 @@ class ContactUs(models.Model):
 
 
 
-@receiver(post_save, sender=ContactUs)
-def SendEmailContactUs(sender, instance=None, created=False, **kwargs):
-    if created:
-        headers = {'Reply-To': instance.contact_email}
-        msg = EmailMultiAlternatives(instance.subject, instance.message, instance.contact_email, ['contact@callnmail.com',],headers=headers)
-        msg.send()
+# @receiver(post_save, sender=ContactUs)
+# def SendEmailContactUs(sender, instance=None, created=False, **kwargs):
+#     if created:
+#         headers = {'Reply-To': instance.contact_email}
+#         msg = EmailMultiAlternatives(instance.subject, instance.message, instance.contact_email, ['contact@callnmail.com',],headers=headers)
+#         msg.send()
 
 @receiver(post_save, sender=User)
 def create_auth_token(sender, instance=None, created=False, **kwargs):
@@ -85,4 +85,4 @@ def create_auth_token(sender, instance=None, created=False, **kwargs):
         UserProfile.objects.create(user=instance)
 
 
-post_save.connect(SendEmailContactUs,sender=ContactUs)
+#post_save.connect(SendEmailContactUs,sender=ContactUs)
