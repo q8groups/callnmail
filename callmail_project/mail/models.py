@@ -4,7 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver,Signal
-from django.core.mail import EmailMultiAlternatives,send_mail
+from django.core.mail import EmailMultiAlternatives
 
 from advertisement.models import UserProfile, Advertisement
 

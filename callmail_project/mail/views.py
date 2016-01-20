@@ -2,7 +2,7 @@ import os
 from django.contrib import messages
 from django.db import IntegrityError
 
-from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives
 
 from django.shortcuts import render, HttpResponseRedirect, HttpResponse, get_object_or_404
 from django.views import generic
@@ -365,12 +365,9 @@ class ContactView(SuccessMessageMixin, generic.CreateView):
     success_url = reverse_lazy('mail:contact')
     success_message = 'Thank you for contacting us. We will get back to you shortly.'
     def form_valid(self, form):
-        send_mail(
-            subject=form.cleaned_data.get('subject').strip(),
-            message=form.cleaned_data.get('message'),
-            from_email='contact@callnmail.com',
-            recipient_list=[form.cleaned_data.get('contact_email'),],
-        )
+        headers = {'Reply-To': instance.contact_email}
+        msg = EmailMultiAlternatives(form.cleaned_data.get('subject').strip(), form.cleaned_data.get('message'), form.cleaned_data.get('message'), ['contact@callnmail.com',],headers=headers)
+        msg.send()
         return super(ContactView, self).form_valid(form)
 
 
