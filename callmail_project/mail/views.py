@@ -365,7 +365,7 @@ class ContactView(SuccessMessageMixin, generic.CreateView):
     success_url = reverse_lazy('mail:contact')
     success_message = 'Thank you for contacting us. We will get back to you shortly.'
     def form_valid(self, form):
-        headers = {'Reply-To': instance.contact_email}
+        headers = {'Reply-To': form.cleaned_data.get('contact_email')}
         msg = EmailMultiAlternatives(form.cleaned_data.get('subject').strip(), form.cleaned_data.get('message'), form.cleaned_data.get('message'), ['contact@callnmail.com',],headers=headers)
         msg.send()
         return super(ContactView, self).form_valid(form)
