@@ -367,7 +367,7 @@ class ContactView(SuccessMessageMixin, generic.CreateView):
     def form_valid(self, form):
         headers = {'Reply-To': form.cleaned_data.get('contact_email')}
         msg = EmailMultiAlternatives(form.cleaned_data.get('subject').strip(), form.cleaned_data.get('message'), form.cleaned_data.get('contact_email'), ['contact@callnmail.com',],headers=headers)
-        html_content = "<p>{0}</p>".format(str(form.cleaned_data.get('message'))).encode('utf8')
+        html_content = "<p>{0}</p>".format(form.cleaned_data.get('message')).encode('utf8')
         msg.attach_alternative(html_content, "text/html")
         msg.send()
         return super(ContactView, self).form_valid(form)
