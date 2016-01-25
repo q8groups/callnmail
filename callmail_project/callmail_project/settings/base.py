@@ -329,7 +329,7 @@ APPLICATION_ID = 'vXWQ3SGr4k85xyHKHtde0gYZXm4rbbTiO4eBUmz6'
 REST_API_KEY = 'nW1TxyIAFJvD6ugBjxq69pAVxdzWeuhVRuz9x1aq'
 
 MAIL_CLEAN_PERIOD = 7
-
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 SMS_MSG_ACTIVATION = "Here's your CallnMail mobile confirmation code : {0} . Enter this in the app or website to verify your mobile number."
 SMS_MSG_PASSWORD = " Here's your CallnMail mobile confirmation code : {0} . Enter this in the app or website and choose your new password."

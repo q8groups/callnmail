@@ -13,7 +13,7 @@
 									<div class="p_content sec_half_left">
 										<ul class="email_list">
                                         {% for mail in emails %}
-											<li><input type="text" name="myhotmail" id="myhotmail{{ forloop.counter }}" placeholder="{{ mail.email }}" readonly/>
+											<li><input type="text" name="myhotmail" id="myhotmail{{ forloop.counter }}" placeholder="{{ mail.title }}" readonly/>
                                                 <a href="{% url 'mail:mailforward_delete' mail.pk %}">x</a></li>
                                             {% endfor %}
 										</ul>

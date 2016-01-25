@@ -128,4 +128,4 @@ class MailForwardForm(forms.ModelForm):
     title = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Title', 'required': 'true'}))
     class Meta:
         model = MailForward
-        fields = ('email', 'title', 'user')
+        fields = ('email', 'title')

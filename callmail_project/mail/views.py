@@ -45,7 +45,7 @@ class RegistrationView(generic.View):
             country_codes = request.POST.get('country_code')
             phone_number = request.POST.get('phone_number')
             phone_number = "+" + country_codes + phone_number
-            request.session['phone_number'] = request.POST.get('phone_number')
+            request.session['phone_number'] = phone_numberc
             if User.objects.filter(username=phone_number, is_active=True).exists():
                 return render(request, 'login2.html', {'form': LoginForm(), 'rform': rform,
                                                     'number_error': 'User with that phone number already exists.'})
@@ -179,8 +179,10 @@ class ActivateUser(generic.View):
         except KeyError:
             return render(request, 'activate_account.html', {'form': form, 'error': 'Please register first.'})
         if form.is_valid():
+            import pdb
+            pdb.set_trace()
             username = phone_number
-            del request.session['phone_number']
+            #del request.session['phone_number']
             activation_code = request.POST.get('activation_code')
             activation = AccountActivation.objects.filter(user__username=username, activation_code=activation_code)
             if activation.exists():
