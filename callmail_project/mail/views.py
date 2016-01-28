@@ -45,7 +45,7 @@ class RegistrationView(generic.View):
             country_codes = request.POST.get('country_code')
             phone_number = request.POST.get('phone_number')
             phone_number = "+" + country_codes + phone_number
-            request.session['phone_number'] = phone_numberc
+            request.session['phone_number'] = phone_number
             if User.objects.filter(username=phone_number, is_active=True).exists():
                 return render(request, 'login2.html', {'form': LoginForm(), 'rform': rform,
                                                     'number_error': 'User with that phone number already exists.'})
