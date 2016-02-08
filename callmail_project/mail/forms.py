@@ -106,6 +106,7 @@ class ChangePasswordForm(forms.Form):
 class ProfileChangeForm(forms.ModelForm):
     first_name = forms.CharField(max_length=255, required=False)
     last_name = forms.CharField(max_length=255, required=False)
+    gender= forms.CharField(widget=forms.Select(attrs={'id':'fuzzOptionsList'}))
 
     class Meta:
         model = UserProfile
