@@ -14,7 +14,7 @@
 										<ul class="email_list">
                                         {% for mail in emails %}
 											<li><input type="text" name="myhotmail" id="myhotmail{{ forloop.counter }}" placeholder="{{ mail.title }}" readonly/>
-                                                <a href="{% url 'mail:mailforward_delete' mail.pk %}">x</a></li>
+                                                <a href="{% url 'mail:mailforward_delete' mail.pk %}">x</a> <a href="{% url 'mail:mailforward_edit' mail.pk %}"> > </a> </li>
                                             {% endfor %}
 										</ul>
 										<div class="create_link">

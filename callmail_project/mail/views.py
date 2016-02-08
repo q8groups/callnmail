@@ -353,6 +353,15 @@ class MailForwardCreateView(LoginRequiredMixin, generic.CreateView):
         return super(MailForwardCreateView, self).form_valid(form)
 
 
+class MailForwardEditView(LoginRequiredMixin, generic.UpdateView):
+    model = MailForward
+    template_name = 'mail_forward_create.html'
+    success_url = reverse_lazy('mail:mailforward_list')
+    form_class = MailForwardForm
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super(MailForwardEditView, self).form_valid(form)
+
 class AboutView(generic.TemplateView):
     template_name = 'about.html'
 

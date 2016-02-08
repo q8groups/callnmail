@@ -755,21 +755,21 @@ text-align: center;
     padding: 0 10px 5px;
     position: relative;
 }
-.email_list li:before{
-    content: "\f105";
-    clear: both;
-    display: inline-block;
-    position: absolute;
-    right: 10px;
-    top: 5px;
-    font-family: 'FontAwesome';
-    font-size: 20px;
-    line-height: 1;
-    color: #bfb6c3;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
+/*.email_list li:before{*/
+    /*content: "\f105";*/
+    /*clear: both;*/
+    /*display: inline-block;*/
+    /*position: absolute;*/
+    /*right: 10px;*/
+    /*top: 5px;*/
+    /*font-family: 'FontAwesome';*/
+    /*font-size: 20px;*/
+    /*line-height: 1;*/
+    /*color: #bfb6c3;*/
+    /*text-rendering: auto;*/
+    /*-webkit-font-smoothing: antialiased;*/
+    /*-moz-osx-font-smoothing: grayscale;*/
+/*}*/
 
 .create_link{
     display: inline-block;
