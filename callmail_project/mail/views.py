@@ -179,8 +179,6 @@ class ActivateUser(generic.View):
         except KeyError:
             return render(request, 'activate_account.html', {'form': form, 'error': 'Please register first.'})
         if form.is_valid():
-            import pdb
-            pdb.set_trace()
             username = phone_number
             #del request.session['phone_number']
             activation_code = request.POST.get('activation_code')
