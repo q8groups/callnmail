@@ -6,6 +6,7 @@ import random
 import requests
 import json
 from datetime import datetime
+import re
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -110,8 +111,9 @@ def send_notification(username,message):
 @task
 def fetch_email(message):
     user_phonenumber = message.to_addresses[0].split('@')[0]
-    domain = message.to_addresses[0].split('@')[1]
-    if ((user_phonenumber[0]=='+' and domain=='callnmail.com') or (message.to_addresses[0]=='contact@callnmail.com') or (message.to_addresses[0]=='bd@callnmail.com')):
+    rdomain = re.search("@[\w.]+", message.to_addresses[0])
+    domain = rdomain.group()
+    if ((user_phonenumber[0]=='+' and domain=='@callnmail.com') or (message.to_addresses[0]=='contact@callnmail.com') or (message.to_addresses[0]=='bd@callnmail.com')):
         try:
             user = User.objects.get(username=user_phonenumber)
             if user.is_active is False:
